@@ -1,9 +1,50 @@
 package nlp.scala.euler
 
+import nlp.scala.util.Stopwatch
+import scala.collection.mutable.PriorityQueue
+
 object P4 extends App {
+  /**
+   * Largest palindrome product
+   * Problem 4
+   * A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+   *
+   * Find the largest palindrome made from the product of two 3-digit numbers.
+   */
+
   def isPalindrome(num: String) = num.reverse == num
 
-  // 以下のコードよりも、priority queuewを使う方法のほうが速い
-  val palindromes = for (x <- 100 to 999; y <- x to 999; num = x * y if isPalindrome(num.toString)) yield num
-  println(palindromes.max)
+  def solution1 = (
+    for {
+      x <- 100 to 999
+      y <- x to 999
+      num = x * y
+      if isPalindrome(num.toString)
+    } yield num
+  ).max
+
+  /**
+   * priority queueを使って積が大きくなる順に計算するほうが速い。
+   * priority queueはデフォルトで降順。タプルの順序は先頭から値が比較される。
+   */
+  def solution2 = {
+    val pq = PriorityQueue.newBuilder[(Int, Int, Int)]
+    pq.enqueue((999 * 999, 999, 999))
+
+    def products: Stream[Int] = {
+      val (p, m, n) = pq.dequeue
+      pq.enqueue((m * (n - 1), m, n - 1))
+      if (m == n) pq.enqueue(((m - 1) * (n - 1), m - 1, n - 1))
+      p #:: products
+    }
+    products.dropWhile(p => !isPalindrome(p.toString)).head
+  }
+
+  val sw = new Stopwatch
+  sw.start("solution1")
+  println(solution1)
+  sw.stop
+  sw.start("solution2")
+  println(solution2)
+  sw.stop
 }

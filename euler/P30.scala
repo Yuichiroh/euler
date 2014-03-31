@@ -17,28 +17,35 @@ object P30 extends App {
    */
 
   val n = args(0).toInt
-  val max = Iterator.from(1).dropWhile(m => BigInt(9).pow(n) * m >= BigInt(10).pow(m)).next
-
   def powers(n: Int) = (0 to 9).map(BigInt(_).pow(n))
-  val powersList = powers(n)
 
   /** greedy way */
-  val sw = new Stopwatch
-  val list = (2 to BigInt(10).pow(max).toInt).filter(e => e.toString.split("").drop(1).map(e2 => powersList(e2.toInt)).sum == e)
-  //  list.foreach(println)
-  println("result:" + list.sum)
-  println(sw.readSplit)
+  def solution1 = {
+    val max = Iterator.from(1).dropWhile(m => BigInt(9).pow(n) * m >= BigInt(10).pow(m)).next
+    val powersList = powers(n)
+    (2 to BigInt(10).pow(max).toInt).filter(e => e.toString.split("").drop(1).map(e2 => powersList(e2.toInt)).sum == e).sum
+  }
 
-  /** べき乗数以外はさぼる */
-  val sw2 = new Stopwatch
-  val format = ("%0" + max + "d")
-  val digitsCombinations = (0 to 9).map(List.fill(max)(_)).flatten.combinations(max).drop(2) // (0,...,0)と(0,...,1)を除く
-  val sums = for {
-    combination <- digitsCombinations
-    sum = combination.map(powersList(_)).sum
-    newList = format.format(sum).split("").drop(1).map(_.toInt).toVector.sorted
-    if combination.equals(newList)
-  } yield sum
-  println("result:" + sums.sum)
-  println(sw2.readSplit)
+  /** 乗数の和が同じになる数の計算を省く */
+  def solution2 = {
+    val max = Iterator.from(1).dropWhile(m => BigInt(9).pow(n) * m >= BigInt(10).pow(m)).next
+    val powersList = powers(n)
+    val format = ("%0" + max + "d")
+    val digitsCombinations = (0 to 9).map(List.fill(max)(_)).flatten.combinations(max).drop(2) // (0,...,0)と(0,...,1)を除く
+    val sums = for {
+      combination <- digitsCombinations
+      sum = combination.map(powersList(_)).sum
+      newList = format.format(sum).split("").drop(1).map(_.toInt).toVector.sorted
+      if combination.equals(newList)
+    } yield sum
+    sums.sum
+  }
+
+  val sw = new Stopwatch
+  sw.start("solution1")
+  println(solution1)
+  sw.stop
+  sw.start("solution2")
+  println(solution2)
+  sw.stop
 }

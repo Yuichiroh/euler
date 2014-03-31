@@ -21,64 +21,34 @@ object P29 extends App {
   val max = args(0).toInt
 
   /** greedy way */
-  val sw = new Stopwatch
-  val tmp = for {
-    a <- 2 to max
-    b <- 2 to max
-  } yield BigInt(a).pow(b)
-  println(tmp.distinct.size.toString)
-  println(sw.readSplit)
+  def solution1 = {
+    val powers = for {
+      a <- 2 to max
+      b <- 2 to max
+    } yield BigInt(a).pow(b)
+    powers.distinct.size.toString
+  }
+
+  def perfectPowers(n: Int) = Stream.from(1).map(BigInt(n).pow(_))
+  def perfectPowersList(max: Int) = Stream.from(2).map(perfectPowers(_).takeWhile(_ <= max))
 
   /** べき乗数のところだけ全列挙して重複チェック */
-  def perfectPower(n: Int) = Iterator.from(1).map(BigInt(n).pow(_))
-  def perfectPowers(max: Int) = Iterator.from(2).map(perfectPower(_).takeWhile(_ <= max).toList)
+  def solution2 = {
+    val ppBases = perfectPowersList(max).takeWhile(_.size > 1).flatten.distinct
+    val ppPowers = for {
+      a <- ppBases
+      b <- 2 to max
+    } yield a.pow(b)
+    (max - 1 - ppBases.size) * (max - 1) + ppPowers.distinct.size
+  }
 
-  val sw2 = new Stopwatch
-  val powers = perfectPowers(max).takeWhile(_.size > 1).toList.flatten.distinct
-  val duplicatedBaseSize = powers.size
-  val tmp2 = for {
-    a <- powers
-    b <- 2 to max
-  } yield a.pow(b)
-  println((max - 1 - duplicatedBaseSize) * (max - 1) + tmp2.distinct.size)
-  println(sw2.readSplit)
-
-  //  var c = 1
-  //  val sum = for {
-  //    powers <- perfectPowers(max).takeWhile(!_.isEmpty)
-  //  } yield {
-  //    c = c + 1
-  //    val list = powers.toList
-  //    println(list.zipWithIndex)
-  //    println(list.size)
-  //    //    val count = list.zipWithIndex.map(n => duplicated(n._2 + 2))
-  //    //    println(count)
-  //    //    println(count.sum)
-  //    //    count.sum
-  //  }
-  //  println(sum.sum)
-  //
-  //  def duplicated(power: Int) = {
-  //    val count = Array.fill(max)(false)
-  //    for (n <- 1 to power) {
-  //      for (m <- Iterator.from(1).map(_ * n).takeWhile(_ <= max))
-  //        count(m - 1) = true
-  //    }
-  //    count.toList.filter(e => e).size
-  //  }
-  //
-  //  def difference(n: Int, m: Int) = (max - 1) / n //XXX
-
-  //  val memo = collection.mutable.Map[BigInt, (Int, Int)]()
-
-  /**
-   * もし、今までにべき乗として出現していない数があれば、max-1個の新たな数が生成される。
-   * べき乗数として出現しているならば、最大の底を取って、a^bと表せるとすると、max - max/b個の新たな数が生成される。
-   * XXX 2^2と2^3など、複数の置き換え可能な底にかんして、重複がある XXX
-   */
-  //  val tmp = (2 to max).map(a => {
-  //    val result = Iterator.from(1).takeWhile(n => BigInt(a).pow(n) < 100)
-  //    result.foreach(e => memo(BigInt(a).pow(e)) = (a, e))
-  //  })
-
+  // TODO: べき乗数の重複の仕方の規則を実装する
+  
+  val sw = new Stopwatch
+  sw.start("solution1")
+  println(solution1)
+  sw.stop
+  sw.start("solution2")
+  println(solution2)
+  sw.stop
 }

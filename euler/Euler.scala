@@ -9,6 +9,7 @@ object Euler {
 
     def *(f: Fraction) = Fraction(numerator * f.numerator, denominator * f.denominator)
     def +(f: Fraction) = Fraction(numerator * f.denominator + denominator * f.numerator, denominator * f.denominator)
+    def ==(f: Fraction) = { if (numerator == f.numerator && denominator == f.denominator) true else false }
     implicit def FractionInt(n: BigInt): Fraction = new Fraction(n, 1)
   }
 
