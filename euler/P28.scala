@@ -30,5 +30,4 @@ object P28 extends App {
   }
 
   println(sumOfSumOfCorner(1, 4, 1).drop(500).head)
-
 }

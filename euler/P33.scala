@@ -37,16 +37,15 @@ object P33 extends App {
       if n != l
       nm = 10 * n + m
       ml = 10 * m + l
-      fraction = Fraction(nm, ml)
-      if Fraction(n, l) == fraction
+      simplified = Fraction(n, l)
+      if simplified == Fraction(nm, ml)
     } yield {
-      if (n < l) Fraction(n, l)
+      if (n < l) simplified
       else Fraction(l, n)
     }
     (Fraction(1, 1) /: nonTrivials) { _ * _ }.denominator
   }
+
   val sw = new Stopwatch
-  sw.start("solution1")
-  println(solution1)
-  sw.stop
+  sw.time(solution1, "s1")
 }

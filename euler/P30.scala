@@ -31,21 +31,21 @@ object P30 extends App {
     val max = Iterator.from(1).dropWhile(m => BigInt(9).pow(n) * m >= BigInt(10).pow(m)).next
     val powersList = powers(n)
     val format = ("%0" + max + "d")
-    val digitsCombinations = (0 to 9).map(List.fill(max)(_)).flatten.combinations(max).drop(2) // (0,...,0)と(0,...,1)を除く
+    val digitsCombinations = (0 to 9).map(List.fill(max)(_)).flatten.combinations(max)
     val sums = for {
       combination <- digitsCombinations
       sum = combination.map(powersList(_)).sum
       newList = format.format(sum).split("").drop(1).map(_.toInt).toVector.sorted
+      //      newList = format.format(sum).toCharArray.map(_.toString.toInt).toVector.sorted
       if combination.equals(newList)
     } yield sum
-    sums.sum
+    sums.sum - 1 // 1を除く
   }
 
   val sw = new Stopwatch
-  sw.start("solution1")
-  println(solution1)
-  sw.stop
-  sw.start("solution2")
-  println(solution2)
-  sw.stop
+  args(1) match {
+    case "1" => sw.time(solution1, "s1")
+    case "2" => sw.time(solution2, "s2")
+    case _ =>
+  }
 }

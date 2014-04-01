@@ -34,6 +34,8 @@ object Euler {
   def triangleNumber(num: Int): Int = if (num == 0) 0 else num + triangleNumber(num - 1)
   def triangleNumbers = Iterator.from(1).map(triangleNumber)
 
+  def isPrime(n: Int) = Iterator.from(2).takeWhile(m => m * m <= n).forall(n % _ != 0)
+
   def primeNumbers(n: Int) = {
     val primes = Array.fill(n)(true)
     for {

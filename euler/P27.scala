@@ -30,9 +30,7 @@ object P27 extends App {
     (length, a, b)
   }
   val maxLengthPair = lengths.max
+
   println(maxLengthPair._2 * maxLengthPair._3)
-
   println(maxLengthPair)
-
-  //  (1 to 100).foreach(n => println((n, isPrime(n))))
 }

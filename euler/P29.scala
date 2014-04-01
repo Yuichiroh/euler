@@ -42,13 +42,12 @@ object P29 extends App {
     (max - 1 - ppBases.size) * (max - 1) + ppPowers.distinct.size
   }
 
-  // TODO: べき乗数の重複の仕方の規則を実装する
-  
   val sw = new Stopwatch
-  sw.start("solution1")
-  println(solution1)
-  sw.stop
-  sw.start("solution2")
-  println(solution2)
-  sw.stop
+  args(1) match {
+    case "1" => sw.time(solution1, "s1")
+    case "2" => sw.time(solution2, "s2")
+    case _ =>
+    // TODO: べき乗数の重複の仕方の規則を実装する
+  }
+
 }

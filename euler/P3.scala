@@ -10,7 +10,7 @@ object P3 extends App {
    *
    * What is the largest prime factor of the number 600851475143 ?
    */
-  
+
   def factorize(num: Long, prime: Long = 2L): List[Long] = num match {
     case 1 => Nil
     case _ if prime * prime > num => num :: Nil
@@ -21,8 +21,8 @@ object P3 extends App {
   def solution1 = factorize(600851475143L).reverse.head
 
   val sw = new Stopwatch
-  sw.start("solution1")
-  println(solution1)
-  sw.stop
-
+  args.toSeq match {
+    case "1" +: s => sw.time(solution1, "s1")
+    case _ =>
+  }
 }

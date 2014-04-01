@@ -1,7 +1,12 @@
 package nlp.scala.euler
 
+import nlp.scala.util.Stopwatch
+
 object P14 extends App {
   /**
+   * Longest Collatz sequence
+   * Problem 14
+   *
    * The following iterative sequence is defined for the set of positive integers:
    *
    * n → n/2 (n is even)
@@ -16,7 +21,8 @@ object P14 extends App {
    *
    * NOTE: Once the chain starts the terms are allowed to go above one million.
    */
-  val n = 1000000 //1000000
+
+  val n = 1000000
   val seqLengths = Array.fill(n)(0)
 
   def numSeq(num: Long): Stream[Long] = num match {
@@ -37,11 +43,16 @@ object P14 extends App {
     }
   }
 
-  for (num <- (n - 1 to 1 by -1) if seqLengths(num) >= 0) seqLengths(num) = seqLength(num)
-  val list = seqLengths.toList
-  println(list.indexOf(list.max))
+  def solution1 = {
+    for (num <- (n - 1 to 1 by -1) if seqLengths(num) >= 0) seqLengths(num) = seqLength(num)
+    val list = seqLengths.toList
+    list.indexOf(list.max)
+  }
 
-  //  println(list.max)
-  //  println(numSeq(list.indexOf(list.max)).toList.toString)
-  //  println(numSeq(list.indexOf(list.max)).toList.length)
+  val sw = new Stopwatch
+  args.toSeq match {
+    case "1" +: s => sw.time(solution1, "s1")
+    case _ =>
+  }
+
 }

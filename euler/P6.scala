@@ -24,7 +24,8 @@ object P6 extends App {
   }
 
   val sw = new Stopwatch
-  sw.start("solution1")
-  println(solution1)
-  sw.stop
+  args.toSeq match {
+    case "1" +: s => sw.time(solution1, "s1")
+    case _ =>
+  }
 }

@@ -19,7 +19,8 @@ object P9 extends App {
   def solution1 = for (a <- 1 to sum / 3; b <- a + 1 to sum / 2; c = sum - a - b if a * a + b * b == c * c) yield a * b * c
 
   val sw = new Stopwatch
-  sw.start("solution1")
-  solution1.foreach(println)
-  sw.stop
+  args.toSeq match {
+    case "1" +: s => sw.time(solution1, "s1")
+    case _ =>
+  }
 }

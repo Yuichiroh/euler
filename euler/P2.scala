@@ -14,20 +14,11 @@ object P2 extends App {
    */
 
   def fib(a: Int = 1, b: Int = 2): Stream[Int] = a #:: fib(b, a + b)
-
   def solution1 = fib().takeWhile(_ < 4000000).filter(_ % 2 == 0).sum
 
-  def solution2 = {
-    fib2.takeWhile(_ < 4000000).filter(_ % 2 == 0).sum
-  }
-
   val sw = new Stopwatch
-  sw.start("solution1")
-  println(solution1)
-  sw.stop
-
-  sw.start("solution2")
-  val fib2: Stream[Int] = 1 #:: fib2.scanLeft(2)(_ + _)
-  println(solution2)
-  sw.stop
+  args.toSeq match {
+    case "1" +: s => sw.time(solution1, "s1")
+    case _ =>
+  }
 }

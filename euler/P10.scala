@@ -27,7 +27,9 @@ object P10 extends App {
   def solution1 = primeNumbers(2000000).map(_.toLong).sum
 
   val sw = new Stopwatch
-  sw.start("solution1")
-  println(solution1)
-  sw.stop
+  args.toSeq match {
+    case "1" +: s => sw.time(solution1, "s1")
+    case _ =>
+  }
+
 }

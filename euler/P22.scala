@@ -14,14 +14,17 @@ object P22 extends App {
    *
    * What is the total of all the name scores in the file?
    */
+
   val sw = new Stopwatch
 
-  val file = getClass().getResource("names.txt").getFile
-  val names = Source.fromFile(file).getLines.next.split(",").map(_.tail.init).sorted
-  //  val names = List("COLIN")
+  args.toSeq match {
+    case "1" +: s => {
+      val file = getClass().getResource("names.txt").getFile
+      val names = Source.fromFile(file).getLines.next.split(",").map(_.tail.init).sorted
+      def solution1 = names.map(n => BigInt(n.map(c => c.toInt - 'A' + 1).sum)).zipWithIndex.map(e => e._1 * e._2).sum
+      sw.time(solution1, "s1")
+    }
+    case _ =>
+  }
 
-  val answer = names.map(n => BigInt(n.map(c => c.toInt - 'A' + 1).sum)).zipWithIndex.map(e => e._1 * e._2).sum
-  println(answer)
-
-  println(sw.readTotal)
 }

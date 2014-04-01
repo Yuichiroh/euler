@@ -10,7 +10,7 @@ object P1 extends App {
    *
    * Find the sum of all the multiples of 3 or 5 below 1000.
    */
-  
+
   def multiples(n: Int) = Iterator.from(1).map(n*).takeWhile(_ < max)
 
   /** 等差数列の和 */
@@ -27,16 +27,11 @@ object P1 extends App {
   def solution4 = arithmeticSeriesSum(3) + arithmeticSeriesSum(5) - arithmeticSeriesSum(15)
 
   val sw = new Stopwatch
-  sw.start("solution1")
-  println(solution1)
-  sw.stop
-  sw.start("solution2")
-  println(solution2)
-  sw.stop
-  sw.start("solution3")
-  println(solution3)
-  sw.stop
-  sw.start("solution4")
-  println(solution4)
-  sw.stop
+  args.toSeq match {
+    case "1" +: s => sw.time(solution1, "s1")
+    case "2" +: s => sw.time(solution2, "s2")
+    case "3" +: s => sw.time(solution3, "s3")
+    case "4" +: s => sw.time(solution4, "s4")
+    case _ =>
+  }
 }

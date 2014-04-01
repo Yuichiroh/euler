@@ -22,9 +22,7 @@ object P32 extends App {
       case _ => false
     }).map(num => list2int(num.takeRight(4))).toList.distinct.sum
   }
-  
+
   val sw = new Stopwatch
-  sw.start("solution1")
-  println(solution1)
-  sw.stop
+  sw.time(solution1, "s1")
 }
