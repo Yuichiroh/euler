@@ -22,6 +22,8 @@ object Euler {
     def gcd(m: BigInt, n: BigInt): BigInt = if (n == 0) m else gcd(n, m % n)
   }
 
+  def isPalindrome(num: String) = num.reverse == num
+  
   def factorize(num: Long, prime: Long = 2L): List[Long] = num match {
     case 1 => Nil
     case _ if prime * prime > num => num :: Nil

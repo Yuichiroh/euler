@@ -39,10 +39,8 @@ object P33 extends App {
       ml = 10 * m + l
       simplified = Fraction(n, l)
       if simplified == Fraction(nm, ml)
-    } yield {
-      if (n < l) simplified
-      else Fraction(l, n)
-    }
+    } yield if (n < l) simplified else Fraction(l, n)
+
     (Fraction(1, 1) /: nonTrivials) { _ * _ }.denominator
   }
 

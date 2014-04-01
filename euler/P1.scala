@@ -11,6 +11,8 @@ object P1 extends App {
    * Find the sum of all the multiples of 3 or 5 below 1000.
    */
 
+  val max = 1000
+
   def multiples(n: Int) = Iterator.from(1).map(n*).takeWhile(_ < max)
 
   /** 等差数列の和 */
@@ -18,8 +20,6 @@ object P1 extends App {
     val n = (max - 1) / num
     num * n * (n + 1) / 2
   }
-
-  val max = 1000
 
   def solution1 = (1 until max).filter(n => n % 3 == 0 || n % 5 == 0).sum
   def solution2 = (multiples(3) ++ multiples(5)).toList.distinct.sum
