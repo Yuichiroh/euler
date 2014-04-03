@@ -17,11 +17,13 @@ object P36 extends App {
 
   def solution1 = {
     val bound = 999 //1,000,000 -1 = 6桁 = 3桁 * 2
+    val boundSize = bound.toString.size
     val palindromes = Seq(0, 1, 2, 3, 4, 5, 6, 7, 8, 9) ++
-      (1 to bound).flatMap(n =>
-        if (n.toString.size < bound.toString.size) (n.toString + n.toString.reverse).toInt +: (0 to 9).map(m => (n.toString + m + n.toString.reverse).toInt)
-        else (n.toString + n.toString.reverse).toInt +: Nil
-      )
+      (1 to bound).flatMap(n => {
+        val nStr = n.toString
+        if (nStr.size < boundSize) (nStr + nStr.reverse).toInt +: (0 to 9).map(m => (nStr + m + nStr.reverse).toInt)
+        else (nStr + nStr.reverse).toInt +: Nil
+      })
     palindromes.filter(n => isPalindrome(n.toBinaryString)).sum
   }
 
