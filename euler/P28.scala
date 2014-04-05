@@ -1,4 +1,6 @@
-package nlp.scala.euler
+package euler.scala
+
+import scala.collection.immutable.Stream.consWrapper
 
 object P28 extends App {
   /**

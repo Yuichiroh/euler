@@ -1,4 +1,4 @@
-package nlp.scala.euler
+package euler.scala
 
 object P17 extends App {
   /**
@@ -19,5 +19,6 @@ object P17 extends App {
     case _ if (num < 1000) => zero2nineteen(num / 100) + 7 + (if (num % 100 > 0) 3 + numLength(num % 100) else 0) // hundred -> 7, and -> 3
     case _ => 11 // one thousand
   }
+  
   println((1 to 1000).map(numLength).sum)
 }

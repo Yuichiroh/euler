@@ -1,4 +1,4 @@
-package nlp.scala.euler
+package euler.scala
 
 object P21 extends App {
   /**
@@ -18,7 +18,7 @@ object P21 extends App {
 
   def sumOfDivisers(num: Int) = factorize(num).groupBy(prime => prime).map(e => (0 to e._2.length).map(k => BigInt(e._1).pow(k)).sum.toInt).product - num
 
-  val answer = (2 until 10000).filter(n => { val m = sumOfDivisers(n); m < 10000 && n != m && n == sumOfDivisers(m) })
-  println(answer.sum)
-  println(answer.toString)
+  def solution0 = (2 until 10000).filter(n => { val m = sumOfDivisers(n); m < 10000 && n != m && n == sumOfDivisers(m) }).sum
+
+  println(solution0)
 }

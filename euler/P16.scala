@@ -1,6 +1,6 @@
-package nlp.scala.euler
+package euler.scala
 
-import nlp.scala.util.Stopwatch
+
 
 object P16 extends App {
   /**
@@ -12,11 +12,7 @@ object P16 extends App {
    * What is the sum of the digits of the number 2^1000?
    */
 
-  def solution1 = BigInt(2).pow(1000).toString.map(_.asDigit).sum
+  def solution0 = BigInt(2).pow(1000).toString.map(_.asDigit).sum
 
-  val sw = new Stopwatch
-  args.toSeq match {
-    case "1" +: s => sw.time(solution1, "s1")
-    case _ =>
-  }
+  println(solution0)
 }

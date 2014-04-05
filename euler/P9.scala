@@ -1,6 +1,4 @@
-package nlp.scala.euler
-
-import nlp.scala.util.Stopwatch
+package euler.scala
 
 object P9 extends App {
   /**
@@ -16,11 +14,11 @@ object P9 extends App {
    */
 
   val sum = 1000
-  def solution1 = for (a <- 1 to sum / 3; b <- a + 1 to sum / 2; c = sum - a - b if a * a + b * b == c * c) yield a * b * c
+  def solution0 = for (a <- 1 to sum / 3; b <- a + 1 to sum / 2; c = sum - a - b if a * a + b * b == c * c) yield a * b * c
 
-  val sw = new Stopwatch
-  args.toSeq match {
-    case "1" +: s => sw.time(solution1, "s1")
+  
+  args(0) match {
+    case "1" => println(solution0)
     case _ =>
   }
 }

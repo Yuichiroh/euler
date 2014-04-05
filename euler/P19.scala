@@ -1,4 +1,4 @@
-package nlp.scala.euler
+package euler.scala
 
 object P19 extends App {
   /**
@@ -25,6 +25,6 @@ object P19 extends App {
   }
 
   // 1900年１月１日は月曜日。1901年から2000年までで、１日が日曜の月の数を得る。
-  val answer = Iterator.iterate((1900, 1, 1))(day).dropWhile(_._1 < 1901).takeWhile(_._1 < 2001).filter(_._3 == 0).length
-  println(answer)
+  def solution0 = Iterator.iterate((1900, 1, 1))(day).dropWhile(_._1 < 1901).takeWhile(_._1 < 2001).filter(_._3 == 0).length
+  println(solution0)
 }

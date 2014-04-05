@@ -1,6 +1,4 @@
-package nlp.scala.euler
-
-import nlp.scala.util.Stopwatch
+package euler.scala
 
 object P33 extends App {
   /**
@@ -29,7 +27,7 @@ object P33 extends App {
     def gcd(m: Int, n: Int): Int = if (n == 0) m else gcd(n, m % n)
   }
 
-  def solution1 = {
+  def solution0 = {
     val nonTrivials = for {
       n <- (1 to 9)
       m <- (1 to 9)
@@ -44,6 +42,5 @@ object P33 extends App {
     (Fraction(1, 1) /: nonTrivials) { _ * _ }.denominator
   }
 
-  val sw = new Stopwatch
-  sw.time(solution1, "s1")
+  println(solution0)
 }

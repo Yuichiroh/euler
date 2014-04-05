@@ -1,6 +1,7 @@
-package nlp.scala.euler
+package euler.scala
 
-import nlp.scala.util.Stopwatch
+
+import scala.Array.canBuildFrom
 
 object P13 extends App {
   /**
@@ -211,11 +212,7 @@ object P13 extends App {
 20849603980134001723930671666823555245252804609722
 53503534226472524250874054075591789781264330331690"""
 
-  def solution1 = bigDigitsStr.split("\n").map(BigInt(_)).sum.toString.take(10)
+  def solution0 = bigDigitsStr.split("\n").map(BigInt(_)).sum.toString.take(10)
 
-  val sw = new Stopwatch
-  args.toSeq match {
-    case "1" +: s => sw.time(solution1, "s1")
-    case _ =>
-  }
+  println(solution0)  
 }

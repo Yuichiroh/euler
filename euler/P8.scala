@@ -1,6 +1,4 @@
-package nlp.scala.euler
-
-import nlp.scala.util.Stopwatch
+package euler.scala
 
 object P8 extends App {
   /**
@@ -51,11 +49,10 @@ object P8 extends App {
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450"""
 
-  def solution1 = numbers.filter(_.isDigit).map(_.asDigit).sliding(5).map(_.product).max
-
-  val sw = new Stopwatch
-  args.toSeq match {
-    case "1" +: s => sw.time(solution1, "s1")
+  def solution0 = numbers.filter(_.isDigit).map(_.asDigit).sliding(5).map(_.product).max
+  
+  args(0) match {
+    case "1" => println(solution0)
     case _ =>
   }
 

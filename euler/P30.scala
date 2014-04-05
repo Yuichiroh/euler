@@ -1,6 +1,7 @@
-package nlp.scala.euler
+package euler.scala
 
-import nlp.scala.util.Stopwatch
+import scala.Array.canBuildFrom
+import scala.math.BigInt.int2bigInt
 
 object P30 extends App {
   /**
@@ -16,19 +17,20 @@ object P30 extends App {
    * Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.
    */
 
-  val n = args(0).toInt
-  def powers(n: Int) = (0 to 9).map(BigInt(_).pow(n))
+  val n = if (args.size > 1) args(1).toInt else 5
+  
+  def powers(n: Int) = (0 to 9).map(_.pow(n))
 
   /** greedy way */
-  def solution1 = {
-    val max = Iterator.from(1).dropWhile(m => BigInt(9).pow(n) * m >= BigInt(10).pow(m)).next
+  def solution0 = {
+    val max = Iterator.from(1).dropWhile(m => 9.pow(n) * m >= 10.pow(m)).next
     val powersList = powers(n)
-    (2 to BigInt(10).pow(max).toInt).filter(e => e.toString.split("").drop(1).map(e2 => powersList(e2.toInt)).sum == e).sum
+    (2 to 10.pow(max).toInt).filter(e => e.toString.split("").drop(1).map(e2 => powersList(e2.toInt)).sum == e).sum
   }
 
   /** 乗数の和が同じになる数の計算を省く */
-  def solution2 = {
-    val max = Iterator.from(1).dropWhile(m => BigInt(9).pow(n) * m >= BigInt(10).pow(m)).next
+  def solution1 = {
+    val max = Iterator.from(1).dropWhile(m => 9.pow(n) * m >= 10.pow(m)).next
     val powersList = powers(n)
     val format = ("%0" + max + "d")
     val digitsCombinations = (0 to 9).map(List.fill(max)(_)).flatten.combinations(max)
@@ -42,10 +44,7 @@ object P30 extends App {
     sums.sum - 1 // 1を除く
   }
 
-  val sw = new Stopwatch
-  args(1) match {
-    case "1" => sw.time(solution1, "s1")
-    case "2" => sw.time(solution2, "s2")
-    case _ =>
-  }
+  val solutions = List(solution0, solution1)
+  val sId = if (args.size > 0) args(0).toInt else 0
+  println(solutions(sId))
 }

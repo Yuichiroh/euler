@@ -1,6 +1,5 @@
-package nlp.scala.euler
+package euler.scala
 
-import nlp.scala.util.Stopwatch
 import scala.collection.mutable.PriorityQueue
 
 object P4 extends App {
@@ -14,7 +13,7 @@ object P4 extends App {
 
   def isPalindrome(num: String) = num.reverse == num
 
-  def solution1 = (
+  def solution0 = (
     for {
       x <- 100 to 999
       y <- x to 999
@@ -27,7 +26,7 @@ object P4 extends App {
    * priority queueを使って積が大きくなる順に計算するほうが速い。
    * priority queueはデフォルトで降順。タプルの順序は先頭から値が比較される。
    */
-  def solution2 = {
+  def solution1 = {
     val pq = PriorityQueue.newBuilder[(Int, Int, Int)]
     pq.enqueue((999 * 999, 999, 999))
 
@@ -40,10 +39,7 @@ object P4 extends App {
     products.dropWhile(p => !isPalindrome(p.toString)).head
   }
 
-  val sw = new Stopwatch
-  args.toSeq match {
-    case "1" +: s => sw.time(solution1, "s1")
-    case "2" +: s => sw.time(solution2, "s2")
-    case _ =>
-  }
+  val solutions = List(solution0, solution1)
+  val sId = if (args.size > 0) args(0).toInt else 0
+  println(solutions(sId))
 }

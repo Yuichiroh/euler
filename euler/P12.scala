@@ -1,6 +1,4 @@
-package nlp.scala.euler
-
-import nlp.scala.util.Stopwatch
+package euler.scala
 
 object P12 extends App {
   /**
@@ -36,12 +34,7 @@ object P12 extends App {
 
   def numDividers(num: Long) = factorize(num).groupBy(identity).map(_._2.length + 1).product
 
-  def solution1 = triangleNumbers.find(numDividers(_) >= 500).get
+  def solution0 = triangleNumbers.find(numDividers(_) >= 500).get
 
-  val sw = new Stopwatch
-  args.toSeq match {
-    case "1" +: s => sw.time(solution1, "s1")
-    case _ =>
-  }
-
+  println(solution0)
 }

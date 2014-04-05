@@ -1,6 +1,7 @@
-package nlp.scala.euler
+package euler.scala
 
-import nlp.scala.util.Stopwatch
+
+import scala.math.BigInt.int2bigInt
 
 object P15 extends App {
   /**
@@ -18,12 +19,7 @@ object P15 extends App {
    * ただし、分母、分子がLongに入りきらないので注意。
    */
   def combination(a: Int, b: Int) = (BigInt(a - b + 1) to a).product / (BigInt(1) to b).product
-  def solution1 = combination(40, 20)
+  def solution0 = combination(40, 20)
 
-  val sw = new Stopwatch
-  args.toSeq match {
-    case "1" +: s => sw.time(solution1, "s1")
-    case _ =>
-  }
-
+  println(solution0)
 }

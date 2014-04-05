@@ -1,6 +1,7 @@
-package nlp.scala.euler
+package euler.scala
 
-import nlp.scala.util.Stopwatch
+
+import scala.collection.immutable.Stream.consWrapper
 
 object P14 extends App {
   /**
@@ -43,16 +44,11 @@ object P14 extends App {
     }
   }
 
-  def solution1 = {
+  def solution0 = {
     for (num <- (n - 1 to 1 by -1) if seqLengths(num) >= 0) seqLengths(num) = seqLength(num)
     val list = seqLengths.toList
     list.indexOf(list.max)
   }
 
-  val sw = new Stopwatch
-  args.toSeq match {
-    case "1" +: s => sw.time(solution1, "s1")
-    case _ =>
-  }
-
+  println(solution0)
 }

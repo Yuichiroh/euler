@@ -1,4 +1,4 @@
-package nlp.scala.euler
+package euler.scala
 
 import scala.collection.mutable
 

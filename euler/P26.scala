@@ -1,4 +1,4 @@
-package nlp.scala.euler
+package euler.scala
 
 object P26 extends App {
   /**

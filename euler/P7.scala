@@ -1,6 +1,4 @@
-package nlp.scala.euler
-
-import nlp.scala.util.Stopwatch
+package euler.scala
 
 object P7 extends App {
   /**
@@ -12,11 +10,10 @@ object P7 extends App {
    */
 
   def primes: Stream[Int] = 2 #:: Stream.from(3).filter(num => primes.takeWhile(prime => prime * prime <= num).forall(num % _ > 0))
-  def solution1 = primes(10000)
+  def solution0 = primes(10000)
 
-  val sw = new Stopwatch
-  args.toSeq match {
-    case "1" +: s => sw.time(solution1, "s1")
+  args(0) match {
+    case "1" => println(solution0)
     case _ =>
   }
 }

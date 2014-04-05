@@ -1,6 +1,4 @@
-package nlp.scala.euler
-
-import nlp.scala.util.Stopwatch
+package euler.scala
 
 object P3 extends App {
   /**
@@ -18,11 +16,7 @@ object P3 extends App {
     case _ => factorize(num, prime + 1)
   }
 
-  def solution1 = factorize(600851475143L).reverse.head
+  def solution0 = factorize(600851475143L).reverse.head
 
-  val sw = new Stopwatch
-  args.toSeq match {
-    case "1" +: s => sw.time(solution1, "s1")
-    case _ =>
-  }
+  println(solution0)
 }

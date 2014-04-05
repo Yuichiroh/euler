@@ -1,4 +1,6 @@
-package nlp.scala.euler
+package euler.scala
+
+import scala.math.BigInt.int2bigInt
 
 object P23 extends App {
   /**
@@ -29,6 +31,8 @@ object P23 extends App {
 
   val abundernts = (12 to 28123).filter(num => num < sumOfDivisers(num))
   val sumsOfAbunderntPair = for (n <- abundernts; m <- abundernts; sum = n + m if sum <= 28123) yield (n + m)
-  val answer = BigInt(28123) * 28124 / 2 - sumsOfAbunderntPair.distinct.sum
-  println(answer)
+  
+  def solution0 = BigInt(28123) * 28124 / 2 - sumsOfAbunderntPair.distinct.sum
+
+  println(solution0)
 }

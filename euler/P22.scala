@@ -1,7 +1,9 @@
-package nlp.scala.euler
+package euler.scala
 
 import scala.io.Source
-import nlp.scala.util.Stopwatch
+
+import scala.Array.canBuildFrom
+import scala.math.BigInt.int2bigInt
 
 object P22 extends App {
   /**
@@ -15,13 +17,12 @@ object P22 extends App {
    * What is the total of all the name scores in the file?
    */
 
-  def solution1 = {
+  def solution0 = {
     val file = getClass().getResource("names.txt").getFile
     val names = Source.fromFile(file).getLines.next.split(",").map(_.tail.init).sorted
     names.map(n => BigInt(n.map(c => c.toInt - 'A' + 1).sum)).zipWithIndex.map(e => e._1 * e._2).sum
   }
 
-  val sw = new Stopwatch
-  sw.time(solution1, "s1")
+  println(solution0)
 
 }

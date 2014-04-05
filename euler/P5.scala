@@ -1,6 +1,4 @@
-package nlp.scala.euler
-
-import nlp.scala.util.Stopwatch
+package euler.scala
 
 object P5 extends App {
   /**
@@ -15,11 +13,11 @@ object P5 extends App {
 
   def lcm(m: Int, n: Int): Int = m * (n / gcd(m, n))
 
-  def solution1 = (11 to 20).reduceLeft(lcm)
+  def solution0 = (11 to 20).reduceLeft(lcm)
 
-  val sw = new Stopwatch
-  args.toSeq match {
-    case "1" +: s => sw.time(solution1, "s1")
+  
+  args(0) match {
+    case "1" => println(solution0)
     case _ =>
   }
 

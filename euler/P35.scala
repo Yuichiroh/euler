@@ -1,7 +1,8 @@
-package nlp.scala.euler
+package euler.scala
 
 import scala.collection.mutable
-import nlp.scala.util.Stopwatch
+
+import scala.collection.immutable.Stream.consWrapper
 
 object P35 extends App {
   /**
@@ -28,7 +29,8 @@ object P35 extends App {
       case None => {
         if (Iterator.from(2).takeWhile(m => m * m <= n).forall(n % _ != 0)) {
           memoPrimes.put(n, 1); true
-        } else {
+        }
+        else {
           memoPrimes.put(n, 1); false
         }
       }
@@ -43,7 +45,8 @@ object P35 extends App {
         val candidates = (num #:: circulars(num).takeWhile(!_.equals(num))).map(_.mkString("").toInt)
         if (candidates.forall(isPrime)) {
           candidates.foreach(n => memoCircularPrimes.put(n, 1)); true
-        } else {
+        }
+        else {
           candidates.foreach(n => memoCircularPrimes.put(n, -1)); false
         }
       }
@@ -53,7 +56,7 @@ object P35 extends App {
   }
 
   /*７以上の素数は、下一桁が1,3,7,9でなければならない。さらに循環素数であるためには、各桁が1,3,7,9でなければならない。*/
-  def solution1 = {
+  def solution0 = {
     val nums = (2 to max).flatMap(n =>
       List(1, 3, 7, 9).flatMap(List.fill(n)(_)).combinations(n).
         flatMap(_.permutations.toList)
@@ -65,9 +68,5 @@ object P35 extends App {
     circularPrimes.length + 4 // 2,3,5,7を足す
   }
 
-  val sw = new Stopwatch
-  args(0) match {
-    case "1" => sw.time(solution1, "s1")
-    case _ =>
-  }
+  println(solution0)
 }

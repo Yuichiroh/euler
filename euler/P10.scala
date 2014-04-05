@@ -1,6 +1,4 @@
-package nlp.scala.euler
-
-import nlp.scala.util.Stopwatch
+package euler.scala
 
 object P10 extends App {
   /**
@@ -24,12 +22,7 @@ object P10 extends App {
     (2 to (n - 1)).filter(primes(_))
   }
 
-  def solution1 = primeNumbers(2000000).map(_.toLong).sum
-
-  val sw = new Stopwatch
-  args.toSeq match {
-    case "1" +: s => sw.time(solution1, "s1")
-    case _ =>
-  }
-
+  def solution0 = primeNumbers(2000000).map(_.toLong).sum
+  
+  println(solution0)
 }

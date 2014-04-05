@@ -1,6 +1,4 @@
-package nlp.scala.euler
-
-import nlp.scala.util.Stopwatch
+package euler.scala
 
 object P6 extends App {
   /**
@@ -17,15 +15,15 @@ object P6 extends App {
    * Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
    */
 
-  def solution1 = {
+  def solution0 = {
     val sum = (1 to 100).sum
     val squareSum = (1 to 100).map(n => n * n).sum
     sum * sum - squareSum
   }
 
-  val sw = new Stopwatch
-  args.toSeq match {
-    case "1" +: s => sw.time(solution1, "s1")
+  
+  args(0) match {
+    case "1" => println(solution0)
     case _ =>
   }
 }

@@ -1,6 +1,6 @@
-package nlp.scala.euler
+package euler.scala
 
-import nlp.scala.util.Stopwatch
+import scala.Array.canBuildFrom
 
 object P34 extends App {
   /**
@@ -20,7 +20,7 @@ object P34 extends App {
       else (1 to n).product
   }
 
-  def solution1 = {
+  def solution0 = {
     val max = Iterator.from(1).dropWhile(n => ((9!) * n).toString.size >= n).next
     val factorials = (0 to 9).map(_!)
     Iterator.from(10).takeWhile(_.toString.size < max).
@@ -35,7 +35,7 @@ object P34 extends App {
   }
 
   /** 乗数の和が同じになる数の計算を省く */
-  def solution2 = {
+  def solution1 = {
     val max = Iterator.from(1).dropWhile(n => ((9!) * n).toString.size >= n).next - 1
     val factorials = (-1 to 9).map(_!)
     val digitsCombinations = (-1 to 9).map(List.fill(max)(_)).flatten.combinations(max).map(e => removePrefix(e.toList))
@@ -48,7 +48,7 @@ object P34 extends App {
     sums.sum - 3 // 1! と 2!を除外
   }
 
-  def solution3 = {
+  def solution2 = {
     val max = Iterator.from(1).dropWhile(n => ((9!) * n).toString.size >= n).next - 1
     val factorials = (0 to 9).map(_!)
     val digitsCombinations = (2 to max).flatMap(n => (0 to 9).flatMap(List.fill(n)(_)).combinations(n))
@@ -61,11 +61,7 @@ object P34 extends App {
     sums.sum
   }
 
-  val sw = new Stopwatch
-  args(0) match {
-    case "1" => sw.time(solution1, "s1")
-    case "2" => sw.time(solution2, "s2")
-    case "3" => sw.time(solution3, "s3")
-    case _ =>
-  }
+  val solutions = List(solution0, solution1, solution2)
+  val sId = if (args.size > 0) args(0).toInt else 0
+  println(solutions(sId))
 }

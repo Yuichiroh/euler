@@ -1,6 +1,6 @@
-package nlp.scala.euler
+package euler.scala
 
-import scala.language.postfixOps
+import scala.math.BigInt.int2bigInt
 
 object P20 extends App {
   /**

@@ -1,6 +1,4 @@
-package nlp.scala.euler
-
-import nlp.scala.util.Stopwatch
+package euler.scala
 
 object P36 extends App {
   /**
@@ -15,7 +13,7 @@ object P36 extends App {
 
   def isPalindrome(num: String) = num.reverse == num
 
-  def solution1 = {
+  def solution0 = {
     val bound = 999 //1,000,000 -1 = 6桁 = 3桁 * 2
     val boundSize = bound.toString.size
     val palindromes = Seq(0, 1, 2, 3, 4, 5, 6, 7, 8, 9) ++
@@ -27,6 +25,5 @@ object P36 extends App {
     palindromes.filter(n => isPalindrome(n.toBinaryString)).sum
   }
 
-  val sw = new Stopwatch
-  sw.time(solution1, "s1")
+  println(solution0)
 }

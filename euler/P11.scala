@@ -1,6 +1,6 @@
-package nlp.scala.euler
+package euler.scala
 
-import nlp.scala.util.Stopwatch
+import scala.Array.canBuildFrom
 
 object P11 extends App {
   /**
@@ -68,12 +68,7 @@ object P11 extends App {
     Seq(right, down, rightUp, rightDown)
   }
 
-  def solution1 = (for (x <- 0 to 16; y <- 0 to 19) yield product4(x, y).max).max
+  def solution0 = (for (x <- 0 to 16; y <- 0 to 19) yield product4(x, y).max).max
 
-  val sw = new Stopwatch
-  args.toSeq match {
-    case "1" +: s => sw.time(solution1, "s1")
-    case _ =>
-  }
-
+  println(solution0)
 }

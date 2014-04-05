@@ -1,4 +1,7 @@
-package nlp.scala.euler
+package euler.scala
+
+import scala.collection.immutable.Stream.consWrapper
+import scala.math.BigInt.int2bigInt
 
 object P25 extends App {
   /**
@@ -26,5 +29,6 @@ object P25 extends App {
 
   // 1000桁 -> BigIntでなければならない事に注意
   def fib(a: BigInt = 1, b: BigInt = 1): Stream[BigInt] = a #:: fib(b, a + b)
+  
   println(fib().takeWhile(n => n.toString.length < 1000).size + 1)
 }

@@ -1,4 +1,7 @@
-package nlp.scala.euler
+package euler.scala
+
+import scala.collection.immutable.Stream.consWrapper
+import scala.math.BigInt.int2bigInt
 
 object Euler {
   class Fraction private (val numerator: BigInt, val denominator: BigInt) {
@@ -22,8 +25,12 @@ object Euler {
     def gcd(m: BigInt, n: BigInt): BigInt = if (n == 0) m else gcd(n, m % n)
   }
 
+  def gcd(m: Int, n: Int): Int = if (n == 0) m else gcd(n, m % n)
+
+  def lcm(m: Int, n: Int): Int = m * (n / gcd(m, n))
+
   def isPalindrome(num: String) = num.reverse == num
-  
+
   def factorize(num: Long, prime: Long = 2L): List[Long] = num match {
     case 1 => Nil
     case _ if prime * prime > num => num :: Nil

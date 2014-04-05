@@ -1,6 +1,4 @@
-package nlp.scala.euler
-
-import nlp.scala.util.Stopwatch
+package euler.scala
 
 object P32 extends App {
   /**
@@ -13,7 +11,7 @@ object P32 extends App {
 
   def list2int(num: List[Int]) = (0 /: num) { (s, i) => s * 10 + i }
 
-  def solution1 = {
+  def solution0 = {
     val nums = (1 to 9).toList.permutations
     nums.withFilter(_ match {
       case a :: b :: c :: d :: e :: rest =>
@@ -23,6 +21,5 @@ object P32 extends App {
     }).map(num => list2int(num.takeRight(4))).toList.distinct.sum
   }
 
-  val sw = new Stopwatch
-  sw.time(solution1, "s1")
+  println(solution0)
 }

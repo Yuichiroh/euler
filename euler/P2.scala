@@ -1,6 +1,4 @@
-package nlp.scala.euler
-
-import nlp.scala.util.Stopwatch
+package euler.scala
 
 object P2 extends App {
   /**
@@ -14,17 +12,15 @@ object P2 extends App {
    */
 
   def fib(a: Int = 1, b: Int = 2): Stream[Int] = a #:: fib(b, a + b)
-  def solution1 = fib().takeWhile(_ < 4000000).filter(_ % 2 == 0).sum
 
-  def solution2 = {
+  def solution0 = fib().takeWhile(_ < 4000000).filter(_ % 2 == 0).sum
+
+  def solution1 = {
     lazy val fib2: Stream[Int] = 1 #:: fib2.scanLeft(2)(_ + _)
     fib2.takeWhile(_ < 4000000).filter(_ % 2 == 0).sum
   }
 
-  val sw = new Stopwatch
-  args(0) match {
-    case "1" => sw.time(solution1, "s1")
-    case "2" => sw.time(solution2, "s2")
-    case _ =>
-  }
+  val solutions = List(solution0, solution1)
+  val sId = if (args.size > 0) args(0).toInt else 0
+  println(solutions(sId))
 }
