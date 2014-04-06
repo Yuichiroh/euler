@@ -61,7 +61,11 @@ object P34 extends App {
     sums.sum
   }
 
-  val solutions = List(solution0, solution1, solution2)
-  val sId = if (args.size > 0) args(0).toInt else 0
-  println(solutions(sId))
+  val sId = if (args.size > 0) args(0).toInt else 1
+  def solution = sId match {
+    case 0 => solution0
+    case 1 => solution1
+    case 2 => solution2
+  }
+  println(solution)
 }

@@ -44,7 +44,10 @@ object P30 extends App {
     sums.sum - 1 // 1を除く
   }
 
-  val solutions = List(solution0, solution1)
-  val sId = if (args.size > 0) args(0).toInt else 0
-  println(solutions(sId))
+  val sId = if (args.size > 0) args(0).toInt else 1
+  def solution = sId match {
+    case 0 => solution0
+    case 1 => solution1
+  }
+  println(solution)
 }

@@ -41,7 +41,11 @@ object P29 extends App {
     (max - 1 - ppBases.size) * (max - 1) + ppPowers.distinct.size
   }
 
-  val solutions = List(solution0, solution1) // TODO: べき乗数の重複の仕方の規則を実装する
-  val sId = if (args.size > 0) args(0).toInt else 0
-  println(solutions(sId))
+  val sId = if (args.size > 0) args(0).toInt else 1
+  def solution = sId match {
+    case 0 => solution0
+    case 1 => solution1
+    // TODO: べき乗数の重複の仕方の規則を実装する
+  }
+  println(solution)
 }

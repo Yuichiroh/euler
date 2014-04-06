@@ -24,7 +24,12 @@ object P1 extends App {
   def solution2 = multiples(3).sum + multiples(5).sum - multiples(15).sum
   def solution3 = arithmeticSeriesSum(3) + arithmeticSeriesSum(5) - arithmeticSeriesSum(15)
 
-  val solutions = List(solution0, solution1, solution2, solution3)
-  val sId = if (args.size > 0) args(0).toInt else 0
-  println(solutions(sId))
+  val sId = if (args.size > 0) args(0).toInt else 3
+  def solution = sId match {
+    case 0 => solution0
+    case 1 => solution1
+    case 2 => solution2
+    case 3 => solution3
+  }
+  println(solution)
 }

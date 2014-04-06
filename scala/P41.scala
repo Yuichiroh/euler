@@ -1,6 +1,6 @@
 package euler.scala
 
-object P41 extends App{
+object P41 extends App {
   /**
    * Pandigital prime
    * Problem 41
@@ -11,7 +11,7 @@ object P41 extends App{
    */
 
   def isPrime(n: Int) = Iterator.from(2).takeWhile(m => m * m <= n).forall(n % _ != 0)
-  def seq2int(num: Seq[Int]) = (0 /: num) { (s, i) => s * 10 + i }
+  implicit def seq2int(num: Seq[Int]) = (0 /: num) { (s, i) => s * 10 + i }
 
   /** パンデジタル数が素数になるのは、７桁と４桁の時だけ。（各桁の和が３の倍数になるので） */
   def solution0 = ((7 to 1 by -1).permutations ++ (4 to 1 by -1).permutations).map(seq2int).withFilter(isPrime).next

@@ -107,7 +107,10 @@ object P37 extends App {
     r2lPrimes(rPrimitives).filter(isR2LTruncatable).sum
   }
 
-  val solutions = List(solution0, solution1)
   val sId = if (args.size > 0) args(0).toInt else 0
-  println(solutions(sId))
+  def solution = sId match {
+    case 0 => solution0
+    case 1 => solution1
+  }
+  println(solution)
 }

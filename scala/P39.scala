@@ -31,8 +31,10 @@ object P39 extends App {
 
   def solution1 = (Map[Int, Int]().withDefaultValue(0) /: primitiveTriples.takeWhile(_._4 <= 1000).flatMap(tripletMultiples(_).takeWhile(_._4 <= 1000))) { (count, t) => count + (t._4 -> (count(t._4) + 1)) }.maxBy(_._2)
 
-  val solutions = List(solution0, solution1)
-  val sId = if (args.size > 0) args(0).toInt else 0
-  println(solutions(sId))
-
+  val sId = if (args.size > 0) args(0).toInt else 1
+  def solution = sId match {
+    case 0 => solution0
+    case 1 => solution1
+  }
+  println(solution)
 }
