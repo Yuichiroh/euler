@@ -1,6 +1,7 @@
 package euler.scala
 
 import scala.math.BigInt.int2bigInt
+import scala.language.postfixOps
 
 object P20 extends App {
   /**

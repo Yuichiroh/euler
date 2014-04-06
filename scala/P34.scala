@@ -1,6 +1,8 @@
 package euler.scala
 
 import scala.Array.canBuildFrom
+import scala.language.postfixOps
+
 
 object P34 extends App {
   /**

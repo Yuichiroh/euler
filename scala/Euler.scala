@@ -2,6 +2,7 @@ package euler.scala
 
 import scala.collection.immutable.Stream.consWrapper
 import scala.math.BigInt.int2bigInt
+import scala.language.implicitConversions
 
 object Euler {
   class Fraction private (val numerator: BigInt, val denominator: BigInt) {

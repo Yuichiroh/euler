@@ -1,5 +1,7 @@
 package euler.scala
 
+import scala.language.postfixOps
+
 object P1 extends App {
   /**
    * Multiples of 3 and 5

@@ -1,5 +1,7 @@
 package euler.scala
 
+import scala.language.implicitConversions
+
 object P33 extends App {
   /**
    * Digit canceling fractions

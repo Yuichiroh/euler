@@ -1,5 +1,7 @@
 package euler.scala
 
+import scala.language.implicitConversions
+
 object P41 extends App {
   /**
    * Pandigital prime
