@@ -16,9 +16,5 @@ object P9 extends App {
   val sum = 1000
   def solution0 = for (a <- 1 to sum / 3; b <- a + 1 to sum / 2; c = sum - a - b if a * a + b * b == c * c) yield a * b * c
 
-  
-  args(0) match {
-    case "1" => println(solution0)
-    case _ =>
-  }
+  println(solution0)
 }

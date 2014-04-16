@@ -25,7 +25,7 @@ object P27 extends App {
   def isPrime(num: Long) = if (num < 2) false else primes.getOrElseUpdate(num, Iterator.from(2).takeWhile(n => n * n <= num).forall(num % _ != 0))
 
   val bound = 999
-  val lengths = for (a <- (-1 * bound to bound); b <- (-1 * bound to bound)) yield {
+  val lengths = for (a <- (-1 * bound to bound); b <- (-1 * bound to bound) if isPrime(b)) yield {
     val length = Iterator.from(0).takeWhile(n => isPrime(n.toLong * n + a * n.toLong + b)).length
     (length, a, b)
   }

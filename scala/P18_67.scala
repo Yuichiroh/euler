@@ -164,7 +164,7 @@ object P18_67 extends App {
     }
   }
 
-  //  println(sum(triangle).toList.toString)
+  println(sum(triangle).toList.toString)
   println(sum(triangle2).toList.toString)
   // triangle arrayを直接書き換える方法もある
 }

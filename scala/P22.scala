@@ -2,9 +2,6 @@ package euler.scala
 
 import scala.io.Source
 
-import scala.Array.canBuildFrom
-import scala.math.BigInt.int2bigInt
-
 object P22 extends App {
   /**
    * Using names.txt (right click and 'Save Link/Target As...'), a 46K text file containing over five-thousand first names,
@@ -18,11 +15,10 @@ object P22 extends App {
    */
 
   def solution0 = {
-    val file = getClass().getResource("names.txt").getFile
+    val file = getClass().getClassLoader.getResource("names.txt").getFile
     val names = Source.fromFile(file).getLines.next.split(",").map(_.tail.init).sorted
     names.map(n => BigInt(n.map(c => c.toInt - 'A' + 1).sum)).zipWithIndex.map(e => e._1 * e._2).sum
   }
 
   println(solution0)
-
 }

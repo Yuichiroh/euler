@@ -30,9 +30,22 @@ object P23 extends App {
   // (1 to 28123).sum - (sum of two abundant numbers).sum
 
   val abundernts = (12 to 28123).filter(num => num < sumOfDivisers(num))
-  val sumsOfAbunderntPair = for (n <- abundernts; m <- abundernts; sum = n + m if sum <= 28123) yield (n + m)
-  
-  def solution0 = BigInt(28123) * 28124 / 2 - sumsOfAbunderntPair.distinct.sum
 
-  println(solution0)
+  def solution0 = {
+    val sumsOfAbunderntPair = for (n <- abundernts; m <- abundernts if n + m <= 28123) yield (n + m)
+    28123L * 14062 - sumsOfAbunderntPair.distinct.sum
+  }
+
+  def solution1 = {
+    val canBeWritten = Array.fill(28124) { false }
+    for (n <- abundernts; m <- abundernts if n + m <= 28123) canBeWritten(n + m) = true
+    (1 to 28123).filter(!canBeWritten(_)).sum
+  }
+
+  val sId = if (args.size > 0) args(0).toInt else 1
+  def solution = sId match {
+    case 0 => solution0
+    case 1 => solution1
+  }
+  println(solution)
 }

@@ -50,10 +50,6 @@ object P8 extends App {
 71636269561882670428252483600823257530420752963450"""
 
   def solution0 = numbers.filter(_.isDigit).map(_.asDigit).sliding(5).map(_.product).max
-  
-  args(0) match {
-    case "1" => println(solution0)
-    case _ =>
-  }
 
+  println(solution0)
 }
