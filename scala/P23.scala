@@ -1,7 +1,5 @@
 package euler.scala
 
-import scala.math.BigInt
-
 object P23 extends App {
   /**
    * A perfect number is a number for which the sum of its proper divisors is exactly equal to the number.
@@ -16,33 +14,33 @@ object P23 extends App {
    * Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
    */
 
-  def factorize(n: Long, prime: Long = 2L): List[Long] = n match {
+  def factorize(n: Int, prime: Int = 2): List[Int] = n match {
     case 1 => Nil
     case _ if prime * prime > n => n :: Nil
     case _ if n % prime == 0 => prime :: factorize(n / prime, prime)
     case _ => factorize(n, prime + 1)
   }
 
-  def sumOfDivisers(n: Int) = factorize(n).groupBy(identity).map(e => (0 to e._2.length).map(k => BigInt(e._1).pow(k)).sum.toInt).product - n
+  //  def sumOfDivisers(n: Int) = factorize(n).groupBy(identity).map(e => (0 to e._2.length).map(k => BigInt(e._1).pow(k)).sum.toInt).product - n
+  def sumOfDivisers(n: Int) = (Map[Int, Int]() /: factorize(n)) { (ds, d) => ds + (d -> (ds.getOrElse(d, 0) + 1)) }.map(e => (0 to e._2).map(k => Math.pow(e._1, k)).sum).product - n
 
   // 28123より小さいabundant numberを全列挙
   // ２つのabundant numberの和を全列挙
   // (1 to 28123).sum - (sum of two abundant numbers).sum
 
-  def primeNumbers(max: Int) = {
-    val primes = Array.fill(max)(true)
-    for {
-      prime <- Iterator.from(2).takeWhile(n => n * n < max - 1).filter(primes)
-      multi <- (prime * 2) to (max - 1) by prime
-    } primes(multi) = false
-    primes
-  }
+  //  def primeNumbers(max: Int) = {
+  //    val primes = Array.fill(max)(true)
+  //    for {
+  //      prime <- Iterator.from(2).takeWhile(n => n * n < max - 1).filter(primes)
+  //      multi <- (prime * 2) to (max - 1) by prime
+  //    } primes(multi) = false
+  //    primes
+  //  }
 
   //  val isPrime = primeNumbers(28124)
   //  val abundernts = (12 to 28123).filter(n => !isPrime(n) && n < sumOfDivisers(n))
   //  val abundernts = (12 to 28123).filter(num => num % 6 == 0 || num < sumOfDivisers(num))
   val abundernts = (12 to 28123).filter(n => n < sumOfDivisers(n))
-
 
   def solution0 = {
     val sumsOfAbunderntPair = for (n <- abundernts; m <- abundernts if n + m <= 28123) yield (n + m)
