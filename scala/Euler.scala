@@ -46,17 +46,23 @@ object Euler {
 
   def isPrime(n: Int) = Iterator.from(2).takeWhile(m => m * m <= n).forall(n % _ != 0)
 
-  def primeNumbers(n: Int) = {
-    val primes = Array.fill(n)(true)
+  def primeNumbers(max: Int) = {
+    val primes = Array.fill(max)(true)
     for {
-      prime <- 2 to (n - 1)
-      if primes(prime)
-      multi <- (prime * 2) to (n - 1) by prime
-    } {
-      primes(multi) = false
-    }
+      prime <- Iterator.from(2).takeWhile(n => n * n < max - 1).filter(primes)
+      multi <- (prime * 2) to (max - 1) by prime
+    } primes(multi) = false
+    (2 to (max - 1)).filter(primes(_))
+  }
 
-    (2 to (n - 1)).filter(primes(_))
+  def primeNumbersArray(index: Int) = {
+    val primes = new Array[Int](index)
+    primes(0) = 2
+    for (i <- (1 to index - 1)) {
+      primes(i) = Iterator.from(primes(i - 1) + 1).withFilter(m =>
+        (0 to i - 1).forall(m % primes(_) != 0)).next
+    }
+    primes
   }
 
   //  def fib(a: Int = 1, b: Int = 1): Stream[Int] = a #:: fib(b, a + b)

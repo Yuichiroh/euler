@@ -16,20 +16,33 @@ object P23 extends App {
    * Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
    */
 
-  def factorize(num: Long, prime: Long = 2L): List[Long] = num match {
+  def factorize(n: Long, prime: Long = 2L): List[Long] = n match {
     case 1 => Nil
-    case _ if prime * prime > num => num :: Nil
-    case _ if num % prime == 0 => prime :: factorize(num / prime, prime)
-    case _ => factorize(num, prime + 1)
+    case _ if prime * prime > n => n :: Nil
+    case _ if n % prime == 0 => prime :: factorize(n / prime, prime)
+    case _ => factorize(n, prime + 1)
   }
 
-  def sumOfDivisers(num: Int) = factorize(num).groupBy(prime => prime).map(e => (0 to e._2.length).map(k => BigInt(e._1).pow(k)).sum.toInt).product - num
+  def sumOfDivisers(n: Int) = factorize(n).groupBy(prime => prime).map(e => (0 to e._2.length).map(k => BigInt(e._1).pow(k)).sum.toInt).product - n
 
   // 28123より小さいabundant numberを全列挙
   // ２つのabundant numberの和を全列挙
   // (1 to 28123).sum - (sum of two abundant numbers).sum
 
-  val abundernts = (12 to 28123).filter(num => num < sumOfDivisers(num))
+  def primeNumbers(max: Int) = {
+    val primes = Array.fill(max)(true)
+    for {
+      prime <- Iterator.from(2).takeWhile(n => n * n < max - 1).filter(primes)
+      multi <- (prime * 2) to (max - 1) by prime
+    } primes(multi) = false
+    primes
+  }
+
+  //  val isPrime = primeNumbers(28124)
+  //  val abundernts = (12 to 28123).filter(n => !isPrime(n) && n < sumOfDivisers(n))
+  val abundernts = (12 to 28123).filter(n => n < sumOfDivisers(n))
+
+  //    val abundernts = (12 to 28123).filter(num => num % 6 == 0 || num < sumOfDivisers(num))
 
   def solution0 = {
     val sumsOfAbunderntPair = for (n <- abundernts; m <- abundernts if n + m <= 28123) yield (n + m)

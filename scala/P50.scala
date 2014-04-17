@@ -22,7 +22,7 @@ object P50 extends App {
   val isPrime = {
     val primes = Array.fill(max)(true)
     for {
-      prime <- 2 to (max - 1) if primes(prime)
+      prime <- Iterator.from(2).takeWhile(n => n * n < max - 1).filter(primes)
       multi <- (prime * 2) to (max - 1) by prime
     } primes(multi) = false
     primes

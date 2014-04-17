@@ -30,8 +30,8 @@ object P30 extends App {
 
   /** 乗数の和が同じになる数の計算を省く */
   def solution1 = {
-    val max = Iterator.from(1).dropWhile(m => 9.pow(n) * m >= 10.pow(m)).next
     val powersList = powers(n)
+    val max = Iterator.from(1).dropWhile(m => powersList(9) * m >= 10.pow(m)).next
     val format = ("%0" + max + "d")
     val digitsCombinations = (0 to 9).map(List.fill(max)(_)).flatten.combinations(max)
     val sums = for {
