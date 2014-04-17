@@ -1,6 +1,6 @@
 package euler.scala
 
-import scala.math.BigInt.int2bigInt
+import scala.math.BigInt
 
 object P23 extends App {
   /**
@@ -23,7 +23,7 @@ object P23 extends App {
     case _ => factorize(n, prime + 1)
   }
 
-  def sumOfDivisers(n: Int) = factorize(n).groupBy(prime => prime).map(e => (0 to e._2.length).map(k => BigInt(e._1).pow(k)).sum.toInt).product - n
+  def sumOfDivisers(n: Int) = factorize(n).groupBy(identity).map(e => (0 to e._2.length).map(k => BigInt(e._1).pow(k)).sum.toInt).product - n
 
   // 28123より小さいabundant numberを全列挙
   // ２つのabundant numberの和を全列挙
@@ -40,9 +40,9 @@ object P23 extends App {
 
   //  val isPrime = primeNumbers(28124)
   //  val abundernts = (12 to 28123).filter(n => !isPrime(n) && n < sumOfDivisers(n))
+  //  val abundernts = (12 to 28123).filter(num => num % 6 == 0 || num < sumOfDivisers(num))
   val abundernts = (12 to 28123).filter(n => n < sumOfDivisers(n))
 
-  //    val abundernts = (12 to 28123).filter(num => num % 6 == 0 || num < sumOfDivisers(num))
 
   def solution0 = {
     val sumsOfAbunderntPair = for (n <- abundernts; m <- abundernts if n + m <= 28123) yield (n + m)
