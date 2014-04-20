@@ -1,7 +1,5 @@
 package euler.scala
 
-import scala.math.BigInt.int2bigInt
-
 object P23 extends App {
   /**
    * A perfect number is a number for which the sum of its proper divisors is exactly equal to the number.
@@ -16,23 +14,40 @@ object P23 extends App {
    * Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
    */
 
-  def factorize(num: Long, prime: Long = 2L): List[Long] = num match {
+  def factorize(n: Int, prime: Int = 2): List[Int] = n match {
     case 1 => Nil
-    case _ if prime * prime > num => num :: Nil
-    case _ if num % prime == 0 => prime :: factorize(num / prime, prime)
-    case _ => factorize(num, prime + 1)
+    case _ if prime * prime > n => n :: Nil
+    case _ if n % prime == 0 => prime :: factorize(n / prime, prime)
+    case _ => factorize(n, prime + 1)
   }
 
-  def sumOfDivisers(num: Int) = factorize(num).groupBy(prime => prime).map(e => (0 to e._2.length).map(k => BigInt(e._1).pow(k)).sum.toInt).product - num
+  //  def sumOfDivisers(n: Int) = factorize(n).groupBy(identity).map(e => (0 to e._2.length).map(k => BigInt(e._1).pow(k)).sum.toInt).product - n
+  def sumOfDivisers(n: Int) = (Map[Int, Int]() /: factorize(n)) { (ds, d) => ds + (d -> (ds.getOrElse(d, 0) + 1)) }.map(e => (0 to e._2).map(k => Math.pow(e._1, k)).sum).product - n
 
   // 28123より小さいabundant numberを全列挙
   // ２つのabundant numberの和を全列挙
   // (1 to 28123).sum - (sum of two abundant numbers).sum
 
-  val abundernts = (12 to 28123).filter(num => num < sumOfDivisers(num))
-  val sumsOfAbunderntPair = for (n <- abundernts; m <- abundernts; sum = n + m if sum <= 28123) yield (n + m)
-  
-  def solution0 = BigInt(28123) * 28124 / 2 - sumsOfAbunderntPair.distinct.sum
+  //  val isPrime = primeNumbers(28124)
+  //  val abundernts = (12 to 28123).filter(n => !isPrime(n) && n < sumOfDivisers(n))
+  //  val abundernts = (12 to 28123).filter(num => num % 6 == 0 || num < sumOfDivisers(num))
+  val abundernts = (12 to 28123).filter(n => n < sumOfDivisers(n))
 
-  println(solution0)
+  def solution0 = {
+    val sumsOfAbunderntPair = for (n <- abundernts; m <- abundernts if n + m <= 28123) yield (n + m)
+    28123L * 14062 - sumsOfAbunderntPair.distinct.sum
+  }
+
+  def solution1 = {
+    val canBeWritten = Array.fill(28124) { false }
+    for (n <- abundernts; m <- abundernts if n + m <= 28123) canBeWritten(n + m) = true
+    (1 to 28123).filter(!canBeWritten(_)).sum
+  }
+
+  val sId = if (args.size > 0) args(0).toInt else 1
+  def solution = sId match {
+    case 0 => solution0
+    case 1 => solution1
+  }
+  println(solution)
 }

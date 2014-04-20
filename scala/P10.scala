@@ -9,17 +9,13 @@ object P10 extends App {
    * Find the sum of all the primes below two million.
    */
 
-  def primeNumbers(n: Int) = {
-    val primes = Array.fill(n)(true)
+  def primeNumbers(max: Int) = {
+    val primes = Array.fill(max)(true)
     for {
-      prime <- 2 to (n - 1)
-      if primes(prime)
-      multiple <- (prime * 2) to (n - 1) by prime
-    } {
-      primes(multiple) = false
-    }
-
-    (2 to (n - 1)).filter(primes(_))
+      prime <- Iterator.from(2).takeWhile(n => n * n < max - 1).filter(primes)
+      multi <- (prime * 2) to (max - 1) by prime
+    } primes(multi) = false
+    (2 to (max - 1)).filter(primes(_))
   }
 
   def solution0 = primeNumbers(2000000).map(_.toLong).sum

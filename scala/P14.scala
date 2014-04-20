@@ -23,8 +23,8 @@ object P14 extends App {
    * NOTE: Once the chain starts the terms are allowed to go above one million.
    */
 
-  val n = 1000000
-  val seqLengths = Array.fill(n)(0)
+  val init = 1000000
+  val seqLengths = Array.fill(init)(0)
 
   def numSeq(num: Long): Stream[Long] = num match {
     case 1 => 1 #:: Stream.empty[Long]
@@ -45,7 +45,7 @@ object P14 extends App {
   }
 
   def solution0 = {
-    for (num <- (n - 1 to 1 by -1) if seqLengths(num) >= 0) seqLengths(num) = seqLength(num)
+    for (num <- (init - 1 to 1 by -1) if seqLengths(num) >= 0) seqLengths(num) = seqLength(num)
     val list = seqLengths.toList
     list.indexOf(list.max)
   }

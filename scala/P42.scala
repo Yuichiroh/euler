@@ -18,7 +18,7 @@ object P42 extends App {
    * how many are triangle words?
    */
 
-  val file = getClass().getResource("words.txt").getFile
+  val file = getClass().getClassLoader.getResource("words.txt").getFile
 
   /** A is 65 */
   val char2int = ('A' to 'Z').map(c => (c, c.toInt - 64)).toMap

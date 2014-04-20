@@ -13,7 +13,7 @@ object P31 extends App {
    * How many different ways can £2 be made using any number of coins?
    */
 
-  val sum = args(0).toInt
+  val sum = if(args.size > 0) args(0).toInt else 200
   val coins = List(1, 2, 5, 10, 20, 50, 100, 200)
 
   /** using generating function */

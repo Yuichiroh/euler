@@ -15,10 +15,5 @@ object P5 extends App {
 
   def solution0 = (11 to 20).reduceLeft(lcm)
 
-  
-  args(0) match {
-    case "1" => println(solution0)
-    case _ =>
-  }
-
+  println(solution0)
 }

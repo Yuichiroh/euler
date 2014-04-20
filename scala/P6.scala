@@ -21,9 +21,5 @@ object P6 extends App {
     sum * sum - squareSum
   }
 
-  
-  args(0) match {
-    case "1" => println(solution0)
-    case _ =>
-  }
+  println(solution0)
 }

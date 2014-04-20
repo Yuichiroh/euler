@@ -11,6 +11,6 @@ object P24 extends App {
    * What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
    */
 
-  // (0 to 9).toList.permutations は辞書式順序になっている。
-  println((0 to 9).toList.permutations.map(e => e.mkString("").toLong).drop(999999).next)
+  // (0 to 9).permutations は辞書式順序になっている。
+  println((0 to 9).permutations.drop(999999).next.mkString("").toLong)
 }

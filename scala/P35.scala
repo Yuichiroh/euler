@@ -15,8 +15,8 @@ object P35 extends App {
    * How many circular primes are there below one million?
    */
 
-  val memoPrimes = mutable.Map.empty[Int, Int].withDefaultValue(0)
-  val memoCircularPrimes = mutable.Map.empty[Int, Int].withDefaultValue(0)
+  val primes = mutable.Map[Long, Boolean]()
+  val circularPrimes = mutable.Map[Int, Boolean]()
   val max = 6 // 1,000,000 - 1 は６桁
 
   def circulars(num: List[Int]): Stream[List[Int]] = {
@@ -24,36 +24,11 @@ object P35 extends App {
     next #:: circulars(next)
   }
 
-  def isPrime(n: Int) = {
-    memoPrimes.get(n) match {
-      case None => {
-        if (Iterator.from(2).takeWhile(m => m * m <= n).forall(n % _ != 0)) {
-          memoPrimes.put(n, 1); true
-        }
-        else {
-          memoPrimes.put(n, 1); false
-        }
-      }
-      case Some(-1) => false
-      case _ => true
-    }
-  }
+  def isPrime(num: Int) = if (num < 2) false else primes.getOrElseUpdate(num,
+    Iterator.from(2).takeWhile(n => n * n <= num).forall(num % _ != 0))
 
-  def isCircularPrime(num: List[Int]) = {
-    memoCircularPrimes.get(num.mkString("").toInt) match {
-      case None => {
-        val candidates = (num #:: circulars(num).takeWhile(!_.equals(num))).map(_.mkString("").toInt)
-        if (candidates.forall(isPrime)) {
-          candidates.foreach(n => memoCircularPrimes.put(n, 1)); true
-        }
-        else {
-          candidates.foreach(n => memoCircularPrimes.put(n, -1)); false
-        }
-      }
-      case Some(-1) => false
-      case _ => true
-    }
-  }
+  def isCircularPrime(num: List[Int]) = circularPrimes.getOrElseUpdate(num.mkString("").toInt,
+    (num #:: circulars(num).takeWhile(!_.equals(num))).map(_.mkString("").toInt).forall(isPrime))
 
   /*７以上の素数は、下一桁が1,3,7,9でなければならない。さらに循環素数であるためには、各桁が1,3,7,9でなければならない。*/
   def solution0 = {
