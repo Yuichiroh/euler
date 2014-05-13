@@ -3,8 +3,10 @@ package euler.scala
 import scala.collection.immutable.Stream.consWrapper
 import scala.math.BigInt.int2bigInt
 import scala.language.implicitConversions
+import scala.util.Random
 
 object Euler {
+
   class Fraction private (val numerator: BigInt, val denominator: BigInt) {
     override def toString = {
       if (denominator != 1) new StringBuilder(numerator.toString).append("/").append(denominator.toString).toString
@@ -63,6 +65,33 @@ object Euler {
         (0 to i - 1).forall(m % primes(_) != 0)).next
     }
     primes
+  }
+
+  def isPrimeMillerRabin(n: Long) = {
+    if (n == 2) true
+    else if (n % 2 == 0) false
+    else if (n < 9) true
+    else if (n % 3 == 0) false
+    else {
+      val d = divBy2(n - 1)
+      val pseudoPrimes = Set(25326001L, 161304001L, 960946321L, 1157839381L, 3215031751L, 3697278427L, 5764643587L, 6770862367L, 14386156093L, 15579919981L, 18459366157L, 19887974881L, 21276028621L)
+      !pseudoPrimes.contains(n) && List(2, 3, 5).forall(a => {
+        var t = d
+        var y = pow(a, t, n, 1L)
+        while ((t != n - 1) && (y != 1) && (y != n - 1)) {
+          y = (y * y) % n
+          t <<= 1
+        }
+        y == n - 1 || (t & 1) != 0
+      })
+    }
+  }
+
+  def divBy2(n: Long): Long = if (n % 2 != 0) n else divBy2(n / 2)
+
+  def pow(base: Long, power: Long, mod: Long, result: Long): Long = {
+    if (power > 0) pow((base * base) % mod, power >> 1, mod, if ((power & 1) == 1) (result * base) % mod else result)
+    else result
   }
 
   //  def fib(a: Int = 1, b: Int = 1): Stream[Int] = a #:: fib(b, a + b)

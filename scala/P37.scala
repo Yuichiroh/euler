@@ -26,15 +26,7 @@ object P37 extends App {
 
   val memoPrimes = mutable.Map.empty[Long, Boolean]
 
-  def isPrime(n: Long) = {
-    memoPrimes.get(n) match {
-      case Some(p) => p
-      case None => {
-        if (Iterator.from(2).takeWhile(m => m * m <= n).forall(n % _ != 0)) { memoPrimes.put(n, true); true }
-        else { memoPrimes.put(n, false); false }
-      }
-    }
-  }
+  def isPrime(n: Long) = memoPrimes.getOrElseUpdate(n, Iterator.from(2).takeWhile(m => m * m <= n).forall(n % _ != 0))
 
   val lPrimitives = Stream(2, 3, 5, 7L)
   val rPrimitives = Stream(3, 7L)
