@@ -35,10 +35,10 @@ object P68 extends App {
    * n * sum_l = sum_o + 2 * sum_i <=> sum_i = n * (sum_l - 2n - 1)
    */
 
-  def outers(n: Int) = (1 to 2 * n).combinations(n).withFilter(_.sum % n == 0)
+  def outers(n: Int) = (1 to 2 * n).toArray.combinations(n).withFilter(_.sum % n == 0)
     .flatMap(_.permutations).withFilter(o => o(0) == o.min)
 
-  def inners(n: Int, outer: Seq[Int]) = (1 to 2 * n).diff(outer).permutations
+  def inners(n: Int, outer: Seq[Int]) = (1 to 2 * n).toArray.diff(outer).permutations
 
   case class Ring(n: Int, outer: Seq[Int], inner: Seq[Int])
 
@@ -48,20 +48,19 @@ object P68 extends App {
   }
 
   def nGonRing(r: Ring) = {
-    val ngon = new Array[Int](r.n * 3)
+    val ngon = new StringBuilder
     (0 until r.n).foreach(i => {
-      ngon(3 * i) = r.outer(i)
-      ngon(3 * i + 1) = r.inner(i)
-      ngon(3 * i + 2) = r.inner((i + 1) % r.n)
+      ngon append r.outer(i)
+      ngon append r.inner(i)
+      ngon append r.inner((i + 1) % r.n)
     })
-    ngon
+    ngon.toString
   }
 
   def nGonRings(n: Int) = outers(n).flatMap(o => inners(n, o).map(i => Ring(n, o, i)))
     .filter(validRing).map(nGonRing)
 
-  def solution = nGonRings(5)
-    .map(_.mkString).filter(_.size == 16).maxBy(_.toLong)
+  def solution = nGonRings(5).filter(_.size == 16).maxBy(_.toLong)
 
   println(solution)
 }
