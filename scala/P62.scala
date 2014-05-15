@@ -15,7 +15,7 @@ object P62 extends App {
   val cubesWithSameDigitSize = Iterator.from(3).map(n => cubes.takeWhile(_ < Math.pow(10, n).toLong))
 
   val largestSizeCubePermutations = cubesWithSameDigitSize.map(cubes =>
-    cubes.toList.groupBy(cube => cube.toString.toCharArray().sorted.mkString.toLong).map(_._2)
+    cubes.toSeq.groupBy(cube => cube.toString.toCharArray().sorted.mkString.toLong).map(_._2)
   ).map(permutations => permutations.groupBy(_.size).maxBy(_._1))
 
   println(largestSizeCubePermutations.dropWhile(_._1 < 5).next._2.map(_.head).min)

@@ -25,7 +25,7 @@ object P49 extends App {
 
   def primeNumbers = (min to (max - 1)).filter(isPrime)
 
-  def solution0 = primeNumbers.groupBy(_.toString.toCharArray.toList.sorted).withFilter(_._2.size > 2).
+  def solution0 = primeNumbers.groupBy(_.toString.toSeq.sorted).withFilter(_._2.size > 2).
     flatMap(_._2.combinations(3).filter(e => (e(1) - e(0) == e(2) - e(1))))
 
   println(solution0)

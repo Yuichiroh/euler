@@ -26,15 +26,6 @@ object P14 extends App {
   val init = 1000000
   val seqLengths = Array.fill(init)(0)
 
-  def numSeq(num: Long): Stream[Long] = num match {
-    case 1 => 1 #:: Stream.empty[Long]
-    case _ => {
-      val next = if (num % 2 == 0) num / 2L else 3L * num + 1L
-      if (seqLengths.length > next) seqLengths(next.toInt) = -1
-      num #:: numSeq(next)
-    }
-  }
-
   def seqLength(num: Long): Int = num match {
     case 1 => 1
     case _ => {
@@ -46,8 +37,7 @@ object P14 extends App {
 
   def solution0 = {
     for (num <- (init - 1 to 1 by -1) if seqLengths(num) >= 0) seqLengths(num) = seqLength(num)
-    val list = seqLengths.toList
-    list.indexOf(list.max)
+    seqLengths.indexOf(seqLengths.max)
   }
 
   println(solution0)

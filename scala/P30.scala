@@ -18,7 +18,7 @@ object P30 extends App {
    */
 
   val n = if (args.size > 1) args(1).toInt else 5
-  
+
   def powers(n: Int) = (0 to 9).map(_.pow(n))
 
   /** greedy way */
@@ -38,7 +38,6 @@ object P30 extends App {
       combination <- digitsCombinations
       sum = combination.map(powersList(_)).sum
       newList = format.format(sum).split("").drop(1).map(_.toInt).toVector.sorted
-      //      newList = format.format(sum).toCharArray.map(_.toString.toInt).toVector.sorted
       if combination.equals(newList)
     } yield sum
     sums.sum - 1 // 1を除く

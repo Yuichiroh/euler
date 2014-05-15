@@ -15,12 +15,12 @@ object P40 extends App {
    * d1 × d10 × d100 × d1000 × d10000 × d100000 × d1000000
    */
 
-  def int2seq(n: Int) = n.toString.toCharArray().map(_.toString.toInt).toIterator
+  def int2seq(n: Int) = n.toString.map(_.toString.toInt)
 
   def numStream = Iterator.from(1).flatMap(int2seq)
 
-  def solution0 = numStream.zipWithIndex.takeWhile(_._2 < 1000000).
-    filter(n => (n._2 + 1) % 10 == 0 && Math.log10(n._2 + 1).isValidInt).map(_._1).product
+  def solution0 = numStream.zipWithIndex.takeWhile(_._2 < 1000000)
+    .collect{case n if (n._2 + 1) % 10 == 0 && Math.log10(n._2 + 1).isValidInt => n._1}.product
 
   println(solution0)
 }

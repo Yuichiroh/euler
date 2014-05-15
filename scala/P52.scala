@@ -12,11 +12,11 @@ object P52 extends App {
   /** ６倍しても繰り上がりがあってはいけない。 すなわち、最上位の位は1。上から2番目の位は0から6。*/
 
   def isValidNum(n: Int) = {
-    val list = n.toString.toCharArray
+    val list = n.toString
     list(0).toString.toInt == 1 && list(1).toString.toInt < 7
   }
 
-  def composeOfSameDigits(n: Int, m: Int) = n.toString.toCharArray.map(_.toString.toInt).toList.sorted == m.toString.toCharArray.map(_.toString.toInt).toList.sorted
+  def composeOfSameDigits(n: Int, m: Int) = n.toString.map(_.toString.toInt).sorted == m.toString.map(_.toString.toInt).sorted
 
   def solution0 = Iterator.from(10).find(n => isValidNum(n) && (2 to 6).map(n*).forall(composeOfSameDigits(n, _))).get
 

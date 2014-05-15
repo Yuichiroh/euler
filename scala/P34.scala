@@ -3,7 +3,6 @@ package euler.scala
 import scala.Array.canBuildFrom
 import scala.language.postfixOps
 
-
 object P34 extends App {
   /**
    * Digit factorials
@@ -16,10 +15,11 @@ object P34 extends App {
    */
 
   implicit class RichInt(val n: Int) {
-    def ! : Int =
-      if (n == -1) 0
-      else if (n == 0) 1
-      else (1 to n).product
+    def ! : Int = n match {
+      case -1 => 0
+      case 0 => 1
+      case _ => (1 to n).product
+    }
   }
 
   def solution0 = {
@@ -27,7 +27,7 @@ object P34 extends App {
     val factorials = (0 to 9).map(_!)
     Iterator.from(10).takeWhile(_.toString.size < max).
       filter(n =>
-        n.toString.toCharArray().map(n => factorials(n.toString.toInt)).sum == n
+        n.toString.map(n => factorials(n.toString.toInt)).sum == n
       ).sum
   }
 
@@ -40,11 +40,11 @@ object P34 extends App {
   def solution1 = {
     val max = Iterator.from(1).dropWhile(n => ((9!) * n).toString.size >= n).next - 1
     val factorials = (-1 to 9).map(_!)
-    val digitsCombinations = (-1 to 9).map(List.fill(max)(_)).flatten.combinations(max).map(e => removePrefix(e.toList))
+    val digitsCombinations = (-1 to 9).flatMap(Seq.fill(max)(_)).combinations(max).map(e => removePrefix(e.toList))
     val sums = for {
       combination <- digitsCombinations
       sum = combination.map(n => factorials(n + 1)).sum
-      newList = sum.toString.toCharArray.map(_.toString.toInt).toList.sorted
+      newList = sum.toString.map(_.toString.toInt).toList.sorted
       if combination.equals(newList)
     } yield sum
     sums.sum - 3 // 1! と 2!を除外
@@ -57,7 +57,7 @@ object P34 extends App {
     val sums = for {
       combination <- digitsCombinations
       sum = combination.map(n => factorials(n)).sum
-      newList = sum.toString.toCharArray.map(_.toString.toInt).toList.sorted
+      newList = sum.toString.map(_.toString.toInt).toList.sorted
       if combination.equals(newList)
     } yield sum
     sums.sum

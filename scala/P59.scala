@@ -38,7 +38,8 @@ object P59 extends App {
    * "st"
    * "ed"
    */
-  val source = Source.fromFile(getClass.getClassLoader.getResource("cipher1.txt").getPath).getLines.mkString("\n").split(",").map(_.toLowerCase().toInt)
+  val source = Source.fromFile(getClass.getClassLoader.getResource("cipher1.txt").getPath)
+    .getLines.mkString("\n").split(",").map(_.toLowerCase().toInt)
 
   def getDistributions(cycle: Int = 3) = {
     val distributions = Array.fill(cycle)(new Array[Int](source.length / cycle + 1))
@@ -46,10 +47,14 @@ object P59 extends App {
       i <- 0 to source.length / cycle - 1
       j <- 0 to cycle - 1
     } if (i * cycle + j < source.length) distributions(j)(i) = source(i * cycle + j)
-    distributions.toList.map(d => (Map[Int, Int]() /: d.toList) { (map, c) => if (c == 0) map else map + (c -> (map.getOrElse(c, 0) + 1)) }.toList.sortBy(_._2 * -1))
+
+    distributions.map(d =>
+      (Map[Int, Int]() /: d) { (map, c) => if (c == 0) map else map + (c -> (map.getOrElse(c, 0) + 1)) }
+        .toList.sortBy(_._2 * -1)
+    )
   }
 
-  def xors(n: Int) = ('a'.toInt to 'z'.toInt).map(key => (key, n ^ key)).toList
+  def xors(n: Int) = ('a'.toInt to 'z'.toInt).map(key => (key, n ^ key)).toSeq
 
   def detectKey(distribution: List[(Int, Int)]) = {
     val space = xors(' '.toInt)
@@ -70,16 +75,16 @@ object P59 extends App {
     }
   }
 
-  def decrypt(text: Stream[Int], key: Array[Int]) = {
+  def decrypt(text: Array[Int], key: Array[Int]) = {
     var k = -1
     text.map(c => { k = (k + 1) % 3; (c ^ key(k)) })
   }
 
-  val key = getDistributions().map(detectKey(_))
-  val text = decrypt(source.toStream, key.toArray)
+  val key = getDistributions().map(detectKey)
+  val text = decrypt(source, key)
   val answer = text.sum
-  println(key.map(_.toChar.toString))
-  println(text.map(_.toChar.toString).mkString)
+  //    println(key.map(_.toChar.toString).toList)
+  //    println(text.map(_.toChar.toString).mkString)
   println(answer)
 
   //  getDistributions().foreach(d => println(d.take(5)))

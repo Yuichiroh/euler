@@ -22,7 +22,7 @@ object P1 extends App {
   }
 
   def solution0 = (1 until max).filter(n => n % 3 == 0 || n % 5 == 0).sum
-  def solution1 = (multiples(3) ++ multiples(5)).toList.distinct.sum
+  def solution1 = (multiples(3) ++ multiples(5)).toSeq.distinct.sum
   def solution2 = multiples(3).sum + multiples(5).sum - multiples(15).sum
   def solution3 = arithmeticSeriesSum(3) + arithmeticSeriesSum(5) - arithmeticSeriesSum(15)
 

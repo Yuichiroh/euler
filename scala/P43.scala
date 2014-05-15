@@ -28,11 +28,11 @@ object P43 extends App {
     def constraints(n: Seq[Int]) = n(5) == 5
     def isAllDivisible(n: Seq[Int]) = (0 to 6).forall(k => n.slice(k + 1, k + 4).mkString.toInt % divisors(k) == 0)
 
-    pandigitals.withFilter(constraints).withFilter(isAllDivisible).map(_.mkString.toLong).sum
+    pandigitals.collect { case n if constraints(n) && isAllDivisible(n) => n.mkString.toLong }.sum
   }
 
   def solution1 = {
-    implicit def int2list(n: Int) = n.toString.toCharArray().map(_.toString.toInt).toList
+    implicit def int2list(n: Int) = n.toString.map(_.toString.toInt).toList
     implicit def list2int(num: List[Int]) = (0L /: num) { (s, i) => s * 10 + i }
 
     def multiples(n: Int) = Iterator.from(1).map(n*).map(int2list).withFilter(_.size > 1).
@@ -40,7 +40,7 @@ object P43 extends App {
 
     def multi(n: Int, used: List[Int]) = (0 to 9).withFilter(!used.contains(_)).map(_ :: used).filter(_.slice(0, 3) % n == 0)
 
-    (multiples(17) /: List(13, 11, 7, 5, 3, 2, 1))((lists, n) => lists.flatMap(m => multi(n, m))).map(list2int).sum
+    (multiples(17) /: Seq(13, 11, 7, 5, 3, 2, 1))((lists, n) => lists.flatMap(m => multi(n, m))).map(list2int).sum
   }
 
   val sId = if (args.size > 0) args(0).toInt else 1

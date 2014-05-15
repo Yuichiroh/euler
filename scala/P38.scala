@@ -22,18 +22,18 @@ object P38 extends App {
    * where n > 1?
    */
 
-  def concatenatedProduct(n: Int, m: Int) = multiples(n).take(m).flatMap(_.toString.toCharArray.map(_.toString.toInt))
+  def concatenatedProduct(n: Int, m: Int) = multiples(n).take(m).flatMap(_.toString.map(_.toString.toInt))
 
-  def multiples(n: Int) = Stream.from(1).map(n * _)
+  def multiples(n: Int) = Iterator.from(1).map(n * _)
 
   @tailrec
-  def isPandigital(n: Int, m: Int = 1): (Boolean, Int, Int, Int) = {
-    val concat = concatenatedProduct(n, m)
+  def isPandigital(n: Int, m: Int = 1): (Boolean, Int) = {
+    val concat = concatenatedProduct(n, m).toList
     val size = concat.size
-    if (size > 9) (false, 0, n, m)
+    if (size > 9) (false, 0)
     else if (size < 9) isPandigital(n, m + 1)
-    else if (concat.toList.sorted == List(1, 2, 3, 4, 5, 6, 7, 8, 9)) (true, concat.mkString("").toInt, n, m)
-    else (false, 0, n, m)
+    else if (concat.sorted == List(1, 2, 3, 4, 5, 6, 7, 8, 9)) (true, concat.mkString.toInt)
+    else (false, 0)
   }
 
   /**
@@ -41,7 +41,7 @@ object P38 extends App {
    * このとき、各数字を１回のみ含むパンデジタルである必要条件はこの最初の数が四桁であること。
    * (4桁 * 1 = 4桁, 4桁 * 2 = 5桁)で9桁を実現しなければならない。
    */
-  def solution0 = (1 to 9999).map(isPandigital(_)).filter(_._1).map(_._2).max
+  def solution0 = (1 to 9999).map(isPandigital(_)).collect { case t if t._1 => t._2 }.max
 
   println(solution0)
 }

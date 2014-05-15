@@ -18,7 +18,7 @@ object P32 extends App {
         (a * 10 + b) * (c * 100 + d * 10 + e) == list2int(rest) ||
           a * (b * 1000 + c * 100 + d * 10 + e) == list2int(rest)
       case _ => false
-    }.map(num => list2int(num.takeRight(4))).toList.distinct.sum
+    }.map(num => list2int(num.takeRight(4))).toSeq.distinct.sum
   }
 
   println(solution0)

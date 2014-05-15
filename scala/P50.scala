@@ -28,14 +28,14 @@ object P50 extends App {
     primes
   }
 
-  val primes = (2 to (max - 1)).filter(isPrime).toList
+  val primes = (2 to (max - 1)).filter(isPrime).toSeq
 
   def diff(e: List[Int]) = e.size
 
   /** 列の長さ、先頭のインデックス、和、のPriorityQqueue */
   def search(pq: PriorityQueue[(Int, Int, Int)]): Int = {
     val (size, fid, sum) = pq.dequeue
-    if (sum < max && isPrime(sum.toInt)) sum
+    if (sum < max && isPrime(sum)) sum
     else {
       pq.enqueue((size - 1, fid, primes.slice(fid, size + fid - 1).sum))
       if (primes.size - fid == size)

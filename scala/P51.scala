@@ -24,10 +24,11 @@ object P51 extends App {
   def findDigitCombination(n: Int) = {
     val heads = n / 10
     val last = n % 10
-    val list = heads.toString.toCharArray.map(_.toString.toInt)
+    val list = heads.toString.map(_.toString.toInt)
     for {
       k <- (0 to 2) if (list.filter(_ != k).sum + last) % 3 != 0
-      indexList = list.zipWithIndex.withFilter(_._1 == k).map(_._2)
+      indexList = list.zipWithIndex.collect { case d if d._1 == k => d._2 }
+//      indexList = (0 until list.size).filter(list(_) == k)
       replacingSize <- (3 to indexList.size by 3)
       combination <- indexList.combinations(replacingSize)
     } yield {

@@ -28,7 +28,7 @@ object P42 extends App {
 
   def word2int(w: String) = w.toUpperCase.toCharArray.map(char2int).sum
 
-  def solution0 = Source.fromFile(file).getLines.next.replaceAll("\"", "").split(",").map(word2int).filter(isTriangleNum).size
+  def solution0 = Source.fromFile(file).getLines.next.replaceAll("\"", "").split(",").map(word2int).count(isTriangleNum)
 
   println(solution0)
 }

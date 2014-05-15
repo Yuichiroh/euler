@@ -17,30 +17,32 @@ object P35 extends App {
 
   val primes = mutable.Map[Long, Boolean]()
   val circularPrimes = mutable.Map[Int, Boolean]()
-  val max = 6 // 1,000,000 - 1 は６桁
+  val maxDigitSize = 6 // 1,000,000 - 1 は６桁
 
-  def circulars(num: List[Int]): Stream[List[Int]] = {
-    val next = (num.head :: num.tail.reverse).reverse
+  def circulars(num: Seq[Int]): Stream[Seq[Int]] = {
+    val next = (num.head +: num.tail.reverse).reverse
     next #:: circulars(next)
   }
 
-  def isPrime(num: Int) = if (num < 2) false else primes.getOrElseUpdate(num,
-    Iterator.from(2).takeWhile(n => n * n <= num).forall(num % _ != 0))
+  def isPrime(num: Int) =
+    if (num < 2) false
+    else primes.getOrElseUpdate(
+      num,
+      Iterator.from(2).takeWhile(n => n * n <= num).forall(num % _ != 0)
+    )
 
-  def isCircularPrime(num: List[Int]) = circularPrimes.getOrElseUpdate(num.mkString("").toInt,
-    (num #:: circulars(num).takeWhile(!_.equals(num))).map(_.mkString("").toInt).forall(isPrime))
+  def isCircularPrime(num: Seq[Int]) = circularPrimes.getOrElseUpdate(
+    num.mkString("").toInt,
+    (num #:: circulars(num).takeWhile(!_.equals(num))).map(_.mkString.toInt).forall(isPrime)
+  )
 
   /*７以上の素数は、下一桁が1,3,7,9でなければならない。さらに循環素数であるためには、各桁が1,3,7,9でなければならない。*/
   def solution0 = {
-    val nums = (2 to max).flatMap(n =>
-      List(1, 3, 7, 9).flatMap(List.fill(n)(_)).combinations(n).
-        flatMap(_.permutations.toList)
-    )
-    val circularPrimes = for {
-      num <- nums
-      if isCircularPrime(num)
-    } yield num.mkString("").toInt
-    circularPrimes.length + 4 // 2,3,5,7を足す
+    (2 to maxDigitSize).flatMap(n =>
+      Seq(1, 3, 7, 9)
+        .flatMap(Seq.fill(n)(_)).combinations(n)
+        .flatMap(_.permutations)
+    ).count(isCircularPrime) + 4 // 2,3,5,7を足す
   }
 
   println(solution0)

@@ -35,10 +35,10 @@ object P68 extends App {
    * n * sum_l = sum_o + 2 * sum_i <=> sum_i = n * (sum_l - 2n - 1)
    */
 
-  def outers(n: Int) = (1 to 2 * n).toArray.combinations(n).withFilter(_.sum % n == 0)
+  def outers(n: Int) = (1 to 2 * n).combinations(n).withFilter(_.sum % n == 0)
     .flatMap(_.permutations).withFilter(o => o(0) == o.min)
 
-  def inners(n: Int, outer: Seq[Int]) = (1 to 2 * n).toArray.diff(outer).permutations
+  def inners(n: Int, outer: Seq[Int]) = (1 to 2 * n).diff(outer).permutations
 
   case class Ring(n: Int, outer: Seq[Int], inner: Seq[Int])
 
