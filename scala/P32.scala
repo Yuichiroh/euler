@@ -13,12 +13,12 @@ object P32 extends App {
 
   def solution0 = {
     val nums = (1 to 9).toList.permutations
-    nums.withFilter(_ match {
+    nums.withFilter {
       case a :: b :: c :: d :: e :: rest =>
         (a * 10 + b) * (c * 100 + d * 10 + e) == list2int(rest) ||
           a * (b * 1000 + c * 100 + d * 10 + e) == list2int(rest)
       case _ => false
-    }).map(num => list2int(num.takeRight(4))).toList.distinct.sum
+    }.map(num => list2int(num.takeRight(4))).toList.distinct.sum
   }
 
   println(solution0)

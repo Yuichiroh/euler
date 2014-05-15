@@ -9,6 +9,10 @@ object P7 extends App {
    * What is the 10 001st prime number?
    */
 
+  def solution0 = primes(target - 1)
+  def solution1 = primeNumbers(target).head
+  def solution2 = primeNumbersArray(target)(target - 1)
+
   def primes: Stream[Int] = 2 #:: Stream.from(3).filter(num => primes.takeWhile(prime => prime * prime <= num).forall(num % _ > 0))
 
   def primeNumbers(n: Int) = (List(2) /: (2 to n)) { (primes, index) =>
@@ -26,10 +30,6 @@ object P7 extends App {
   }
 
   val target = if (args.size > 1) args(1).toInt else 10001
-
-  def solution0 = primes(target - 1)
-  def solution1 = primeNumbers(target).head
-  def solution2 = primeNumbersArray(target)(target - 1)
 
   val sId = if (args.size > 0) args(0).toInt else 2
   def solution = sId match {

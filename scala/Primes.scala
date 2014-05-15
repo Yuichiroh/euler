@@ -3,8 +3,8 @@ package euler.scala
 import scala.collection.mutable.ArrayBuffer
 
 class Primes(val sieveMax: Int) extends ArrayBuffer[Int] {
-  private val sieve = new ArrayBuffer[Int]
-  private val memoIsPrime = scala.collection.mutable.Map[Long, Boolean]()
+  private[this] val sieve = new ArrayBuffer[Int]()
+  private[this] val memoIsPrime = scala.collection.mutable.Map[Long, Boolean]()
 
   append(2)
   sieve.append(-1, -1, 0)
@@ -19,7 +19,7 @@ class Primes(val sieveMax: Int) extends ArrayBuffer[Int] {
 
   def isPrimeWithSieve(n: Int) = if (index(n) == -1) false else true
 
-  def expandPrimes(i: Int) = {
+  private[this] def expandPrimes(i: Int) = {
     for (j <- length to i if sieve.length < sieveMax) append(
       Iterator.from(this(j - 1) + 1).withFilter(n => {
         val result = (0 to j - 1).forall(n % this(_) != 0)

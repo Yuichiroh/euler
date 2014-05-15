@@ -36,6 +36,7 @@ object P4 extends App {
       if (m == n) pq.enqueue(((m - 1) * (n - 1), m - 1, n - 1))
       p #:: products
     }
+
     products.dropWhile(p => !isPalindrome(p.toString)).head
   }
 
