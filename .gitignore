@@ -3,12 +3,11 @@
 .worksheet
 .cache
 .DS_Store
-bin
+/bin
 /tmp
-target
-classes
-resources
+/target
+/classes
+/resources
 .log
 
 # for the current directory
-nlp.jar
