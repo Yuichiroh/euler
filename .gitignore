@@ -1,0 +1,14 @@
+# in general
+.settings
+.worksheet
+.cache
+.DS_Store
+bin
+/tmp
+target
+classes
+resources
+.log
+
+# for the current directory
+nlp.jar

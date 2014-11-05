@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/scala"/>
+	<classpathentry kind="src" path="src/test/scala"/>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="con" path="org.scala-ide.sdt.launching.SCALA_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/scalatest_2.11-2.1.6.jar"/>
+	<classpathentry kind="lib" path="lib/akka-actor_2.11-2.3.2.jar"/>
+	<classpathentry kind="lib" path="lib/config-1.2.1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/util"/>
+	<classpathentry kind="lib" path="lib/kyotocabinet.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
