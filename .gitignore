@@ -9,5 +9,6 @@
 /classes
 /resources
 .log
+tmp
 
 # for the current directory
