@@ -1,6 +1,9 @@
 package euler
 
-class Rational(val numerator: Int, val denominator: Int) {
+import scala.runtime.ScalaRunTime
+import scala.runtime.Statics
+
+class Rational(val numerator: Int, val denominator: Int) extends Ordered[Rational] {
   require(denominator != 0)
 
   def this(num: Int) = this(num, 1)
@@ -14,6 +17,20 @@ class Rational(val numerator: Int, val denominator: Int) {
   def +(f: Rational) = Rational(numerator * f.denominator + denominator * f.numerator, denominator * f.denominator)
 
   def ==(f: Rational) = if (numerator == f.numerator && denominator == f.denominator) true else false
+
+  override def compare(that: Rational) = (this.numerator * that.denominator) compare (that.numerator * this.denominator)
+
+  override def hashCode(): Int = {
+    (denominator.hashCode() + 31) * 31 + numerator.hashCode()
+  }
+
+  override def equals(obj: Any) = {
+    if (obj.isInstanceOf[Rational]) {
+      val that = obj.asInstanceOf[Rational]
+      if ((this.numerator * that.denominator) == (that.numerator * this.denominator)) true else false
+    }
+    else false
+  }
 }
 
 object Rational {
