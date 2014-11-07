@@ -17,6 +17,14 @@ class Factorization(max: Int) {
       Factor(p, e) :: factorize(m)
   }
 
+  def flatFactorize(n: Int): List[Int] = n match {
+    case 1 => Nil
+    case _ =>
+      val p = factors(n)
+      val (e, m) = divPow(n, p)
+      List.fill(e)(p) ::: flatFactorize(m)
+  }
+
   def divPow(n: Int, divisor: Int, e: Int = 0): (Int, Int) = (n % divisor) match {
     case 0 => divPow(n / divisor, divisor, e + 1)
     case _ => (e, n)
@@ -27,4 +35,4 @@ object Factorization {
   def apply(n: Int) = new Factorization(n)
 }
 
-case class Factor(p:Int, e:Int)
+case class Factor(p: Int, e: Int)
