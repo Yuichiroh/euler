@@ -19,8 +19,8 @@ object P72 extends App {
     (2 to limit).map(n => phi(n)).sum
   }
 
-  val sId = if (args.size > 0) args(0).toInt else 1
-  val limit = args(1).toInt
+  val sId = if (args.size > 0) args(0).toInt else 0
+  val limit = if (args.size > 1) args(1).toInt else 1000000
   def solution = sId match {
     case 0 => solution0
   }

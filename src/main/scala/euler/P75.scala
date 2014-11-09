@@ -24,7 +24,6 @@ import scala.collection.mutable.ArrayBuffer
   * for how many values of L ≤ 1,500,000 can exactly one integer sided right angle triangle be formed?
   */
 object P75 extends App {
-  val limit = args(0).toInt // 1500000
 
   /** Generating a tree of all primitive pythagorean triples
     * see Wikipedia: http://www.wikiwand.com/en/Tree_of_primitive_Pythagorean_triples
@@ -52,6 +51,7 @@ object P75 extends App {
     sumCount.count(_._2 < 2)
   }
 
+  val limit = if (args.size > 0) args(0).toInt else 1500000
   println(solution)
 
 }

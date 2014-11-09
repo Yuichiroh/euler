@@ -39,7 +39,7 @@ object P73 extends App {
   }
 
   val sId = if (args.size > 0) args(0).toInt else 1
-  val limit = args(1).toInt
+  val limit = if (args.size > 1) args(1).toInt else 12000
 
   def solution = sId match {
     case 0 => solution0
