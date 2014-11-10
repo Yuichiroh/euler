@@ -33,6 +33,11 @@ package object euler {
     case _                        => factorize(num, prime + 1)
   }
 
+  def digits(n: Int): List[Int] = n match {
+    case 0 => Nil
+    case _ => (n % 10) :: digits(n / 10)
+  }
+  
   def count(list: List[Long]) = (Map[Long, Int]().withDefaultValue(0) /: list) { (m, k) => m + (k -> (m(k) + 1)) }
 
   def triangleNumber(num: Int): Int = if (num == 0) 0 else num + triangleNumber(num - 1)

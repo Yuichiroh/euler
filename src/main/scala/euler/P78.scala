@@ -60,5 +60,12 @@ object P78 extends App {
     Iterator.from(2).dropWhile(n => p(n) % condition != 0).next()
   }
 
+  /** Efficient implementation of the Hardy–Ramanujan–Rademacher formula
+    * see http://journals.cambridge.org/action/displayAbstract?fromPage=online&aid=8710297
+    */
+  def solution2 = {
+    //TODO: implementation
+  }
+
   println(solution1)
 }

@@ -1,4 +1,4 @@
-package euler
+package euler.p1to20
 
 import scala.math.BigInt.int2bigInt
 import scala.language.postfixOps

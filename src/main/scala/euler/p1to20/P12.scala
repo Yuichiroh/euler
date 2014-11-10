@@ -1,4 +1,4 @@
-package euler
+package euler.p1to20
 
 object P12 extends App {
   /**
