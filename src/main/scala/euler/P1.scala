@@ -1,4 +1,4 @@
-package euler.p1to20
+package euler
 
 import scala.language.postfixOps
 
