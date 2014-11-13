@@ -5,38 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5453e8f1-a8c5-4166-9f96-8eae71dfcd27" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/main.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/scala_sdk_2_11_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/scalatest_2_11_2_1_6.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/scalatest_2_11_2_1_62.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/shift_reduce_parser.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/shift_reduce_parser2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/test.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/yuima_experimental_2_11_1_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/yuima_experimental_2_11_1_02.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/euler.eml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.classpath" afterPath="$PROJECT_DIR$/.classpath" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/euler/P1.scala" afterPath="$PROJECT_DIR$/src/main/scala/euler/P1.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/euler/P10.scala" afterPath="$PROJECT_DIR$/src/main/scala/euler/P10.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/euler/P11.scala" afterPath="$PROJECT_DIR$/src/main/scala/euler/P11.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/euler/P12.scala" afterPath="$PROJECT_DIR$/src/main/scala/euler/P12.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/euler/P13.scala" afterPath="$PROJECT_DIR$/src/main/scala/euler/P13.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/euler/P14.scala" afterPath="$PROJECT_DIR$/src/main/scala/euler/P14.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/euler/P15.scala" afterPath="$PROJECT_DIR$/src/main/scala/euler/P15.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/euler/P16.scala" afterPath="$PROJECT_DIR$/src/main/scala/euler/P16.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/euler/P17.scala" afterPath="$PROJECT_DIR$/src/main/scala/euler/P17.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/euler/P18and67.scala" afterPath="$PROJECT_DIR$/src/main/scala/euler/P18and67.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/euler/P19.scala" afterPath="$PROJECT_DIR$/src/main/scala/euler/P19.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/euler/P2.scala" afterPath="$PROJECT_DIR$/src/main/scala/euler/P2.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/euler/P20.scala" afterPath="$PROJECT_DIR$/src/main/scala/euler/P20.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/euler/P29.scala" afterPath="$PROJECT_DIR$/src/main/scala/euler/P29.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/euler/P83.scala" afterPath="$PROJECT_DIR$/src/main/scala/euler/P83.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/euler.iml" afterPath="$PROJECT_DIR$/euler.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/euler/P84.scala" afterPath="$PROJECT_DIR$/src/main/scala/euler/P84.scala" />
     </list>
     <ignored path="euler.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -72,8 +41,8 @@
       <file leaf-file-name="P84.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/euler/P84.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8231511" vertical-offset="0" max-vertical-offset="1232">
-              <caret line="32" column="21" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.7170418" vertical-offset="610" max-vertical-offset="1232">
+              <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -207,7 +176,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -218,94 +187,7 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope">
-        <subPane subId="Project Files" />
-      </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="euler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="euler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="euler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="euler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="euler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="euler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="euler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="euler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="euler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scala" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="euler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="GoToClass.includeLibraries" value="false" />
@@ -640,12 +522,12 @@
       <workItem from="1415711548843" duration="993000" />
       <workItem from="1415713902353" duration="4088000" />
       <workItem from="1415718240990" duration="5311000" />
-      <workItem from="1415801451968" duration="9662000" />
+      <workItem from="1415801451968" duration="9921000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33961000" />
+    <option name="totallyTimeSpent" value="34220000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -832,8 +714,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/euler/P84.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8231511" vertical-offset="0" max-vertical-offset="1232">
-          <caret line="32" column="21" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.7170418" vertical-offset="610" max-vertical-offset="1232">
+          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
           <folding />
         </state>
       </provider>
