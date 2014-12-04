@@ -30,9 +30,9 @@ object P83 extends App {
 
   val result = new Dijkstracosts(costs).search(Pos(0, 0), Pos(costs.size - 1, costs.size - 1))
 
-  case class Pos(i: Int, j: Int)
-
   println(result)
+
+  case class Pos(i: Int, j: Int)
 
   class Dijkstracosts(val costs: Array[Array[Int]]) {
     val max = costs.map(_.max).max * costs.length * 2

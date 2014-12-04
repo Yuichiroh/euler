@@ -1,4 +1,3 @@
-package euler
 
 import scala.io.Source
 import euler.DirectionalIntegerGraph.Node
