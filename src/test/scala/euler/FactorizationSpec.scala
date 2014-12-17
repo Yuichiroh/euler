@@ -1,4 +1,4 @@
-package euler
+package yuima.euler
 
 import org.scalatest.Matchers
 import org.scalatest.WordSpec

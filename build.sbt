@@ -4,12 +4,8 @@ name := "yuima.euler"
 
 version := "1.0"
 
-scalaVersion := "2.11.1"
+scalaVersion := "2.11.4"
 
-resolvers ++= Seq("snapshots" at "http://scala-tools.org/repo-snapshots",
-    "releases" at "http://scala-tools.org/repo-releases",
-    "maven2" at "http://repo1.maven.org/maven2/")
-
-libraryDependencies += "org.scalatest" % "scalatest_2.10" % "2.0" % "test"
+lazy val euler = (project in file("."))
 
 // seq(assemblySettings: _*)
