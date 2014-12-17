@@ -1,6 +1,6 @@
+package yuima.euler
 
 import scala.io.Source
-import yuima.euler.DirectionalIntegerGraph.Node
 
 /** Passcode derivation
   * Problem 79
