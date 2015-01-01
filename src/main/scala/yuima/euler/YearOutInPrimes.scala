@@ -1,7 +1,7 @@
 package yuima.euler
 
 /**
- * Enumerates years that the last day of the year and the first day of the next year are primes.
+ * Enumerates years that the last date of the year and first date of the next year are primes.
  * @author Yuichiroh Matsubayashi
  *         Created on 15/01/01.
  */
