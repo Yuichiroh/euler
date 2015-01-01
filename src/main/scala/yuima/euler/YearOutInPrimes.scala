@@ -1,10 +1,9 @@
 package yuima.euler
 
-/**
- * Enumerates years that the last date of the year and first date of the next year are primes.
- * @author Yuichiroh Matsubayashi
- *         Created on 15/01/01.
- */
+/** Enumerates years that the last date of the year and first date of the next year are primes.
+  * @author Yuichiroh Matsubayashi
+  *         Created on 15/01/01.
+  */
 object PrimeOutInYears extends App {
   val bound = args(0).toLong
 
