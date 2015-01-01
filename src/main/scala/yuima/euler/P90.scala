@@ -28,11 +28,32 @@ package yuima.euler
   * How many distinct arrangements of the two cubes allow for all of the square numbers to be displayed?
   */
 object P90 extends App {
+
+  type Dice = IndexedSeq[Int]
+
   val max = args(0).toInt
 
   val squares = Stream.from(1).map(n => n * n).takeWhile(_ < max)
 
-  val faces = squares.map(sq => "%%0%dd".format(squares.max.toString.size).format(sq)).toList
+  lazy val diceSize = squares.max.toString.size
+  lazy val squarefaceSets = squares.map(sq => "%%0%dd".format(diceSize).format(sq)).toList.map(_.toCharArray.map(_.toString.toInt))
 
-  println(faces)
+  val possibleDices = (0 to 9).combinations(6).toSeq
+
+  def diceCombinations(size: Int): Seq[IndexedSeq[Dice]] =
+    if (size > 1) possibleDices.flatMap(dice => diceCombinations(size - 1).map(dices => dices :+ dice))
+    else possibleDices.map(IndexedSeq(_))
+
+  def isValidDices(dices: IndexedSeq[Dice]) = squarefaceSets.forall { set =>
+    set.permutations.exists { faces =>
+      (0 until faces.size).forall { i =>
+        faces(i) match {
+          case 6 | 9 => dices(i).contains(6) || dices(i).contains(9)
+          case n => dices(i).contains(n)
+        }
+      }
+    }
+  }
+
+  println(diceCombinations(diceSize).map(_.sortBy(_.mkString)).toSet.filter(isValidDices).size)
 }
