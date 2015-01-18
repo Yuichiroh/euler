@@ -1,5 +1,7 @@
 package yuima
 
+import scala.annotation.tailrec
+
 package object euler {
   def gcd(m: Int, n: Int): Int = if (n == 0) m else gcd(n, m % n)
 
@@ -78,6 +80,19 @@ package object euler {
 
   def sumOfDivisers(num: Int) = factorize(num).groupBy(prime => prime).map(e => (0 to e._2.length).map(k => BigInt(e._1).pow(k)).sum.toInt).product - num
 
+  /**
+   * see Wikipedia article: Methods of computing square roots
+   * http://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Continued_fraction_expansion
+   */
+  @tailrec
+  def continuedFractionOfRoot(n: Int, a0: Int, as: List[Int], d: Int, m: Int): List[Int] = {
+    val newD = m * as.head - d
+    val newM = (n - newD * newD) / m
+    val newA = ((a0 + newD) / newM).toInt
+    if (newA == a0 * 2) newA :: as
+    else continuedFractionOfRoot(n, a0, newA :: as, newD, newM)
+  }
+
   class Fraction private(val numerator: BigInt, val denominator: BigInt) {
     override def toString = {
       if (denominator != 1) new StringBuilder(numerator.toString).append("/").append(denominator.toString).toString
@@ -86,25 +101,48 @@ package object euler {
 
     def *(f: Fraction) = Fraction(numerator * f.numerator, denominator * f.denominator)
 
+    def /(f: Fraction) = Fraction(numerator * f.denominator, denominator * f.numerator)
+
     def +(f: Fraction) = Fraction(numerator * f.denominator + denominator * f.numerator, denominator * f.denominator)
+
+    def -(f: Fraction) = Fraction(numerator * f.denominator - denominator * f.numerator, denominator * f.denominator)
 
     def ==(f: Fraction) = {
       if (numerator == f.numerator && denominator == f.denominator) true else false
     }
 
-    implicit def FractionInt(n: BigInt): Fraction = new Fraction(n, 1)
+    implicit def bigInt2fractionInt(n: BigInt): Fraction = new Fraction(n, 1)
+
+    implicit def int2fraction(n: BigInt): Fraction = new Fraction(n, 1)
   }
 
   implicit class RichInt(val n: Int) {
     def ! : BigInt = (BigInt(1) to n).product
+
+    def digits: List[Int] = n match {
+      case 0 => Nil
+      case _ => (n % 10) :: (n / 10).digits
+    }
   }
 
   object Fraction {
+    val * = (f1: Fraction) => (f2: Fraction) => Fraction(f1.numerator * f2.numerator, f1.denominator * f2.denominator)
+    val / = (f1: Fraction) => (f2: Fraction) => Fraction(f1.numerator * f2.denominator, f1.denominator * f2.numerator)
+    val + = (f1: Fraction) => (f2: Fraction) => Fraction(f1.numerator * f2.denominator + f1.denominator * f2.numerator, f1.denominator * f2.denominator)
+    val - = (f1: Fraction) => (f2: Fraction) => Fraction(f1.numerator * f2.denominator - f1.denominator * f2.numerator, f1.denominator * f2.denominator)
+
     def apply(num: BigInt, den: BigInt) = {
+      require(den != 0)
       val d = gcd(num, den)
-      new Fraction(num / d, den / d)
+      if (den > 0) new Fraction(num / d, den / d)
+      else new Fraction(-1 * num / d, -1 * den / d)
+    }
+
+    def apply(num: BigInt) = {
+      new Fraction(num, 1)
     }
 
     def gcd(m: BigInt, n: BigInt): BigInt = if (n == 0) m else gcd(n, m % n)
   }
+
 }
