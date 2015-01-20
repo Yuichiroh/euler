@@ -19,8 +19,6 @@ package yuima.euler
 object P95 extends App {
   val max = if (args.length > 0) args(0).toInt else 1000000
 
-  //  val squares = Stream.from(0).map(n => n * n).takeWhile(_ < max)
-
   val lengths = Array.fill(max)(0)
   lengths(0) = -1
   lengths(1) = 1
@@ -33,12 +31,10 @@ object P95 extends App {
   def sociableNums(head: Int, tail: List[Int]): Unit = {
     if (head >= max || lengths(head) != 0) tail.foreach(n => lengths(n) = -1)
     else {
-      //      println(head)
       val length = tail.indexOf(head) + 1
       if (length > 0) {
         tail.take(length).foreach(n => lengths(n) = length)
         tail.drop(length).foreach(n => lengths(n) = -1)
-        //        println("found",head, length, length, tail.take(length), lengths.toSeq)
       }
       else sociableNums(sumOfDivisers(head), head :: tail)
     }

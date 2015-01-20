@@ -26,7 +26,7 @@ object P98 extends App {
 
   val sqares = Stream.from(0).map(n => n.toLong * n).takeWhile(_ < math.pow(10, maxLength))
 
-  val anagramicSquares = sqares.groupBy(_.toString.sorted).filter(_._2.length > 1)
+  val anagramicSquares = sqares.groupBy(_.toString.sorted).filter(g=> g._1(0) != '0' && g._2.length > 1)
 
   def solution = {
     def canBeAligned(wordPair: List[Char], squarePair: List[Char], alignment: Map[Char, Char] = Map(), used: List[Char] = Nil): Boolean = {
