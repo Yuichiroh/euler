@@ -77,10 +77,6 @@ object NegativePellEquation {
 
     def isPellSolution(d: Int, x: BigInt, y: BigInt) = x * y - d * y * y == BigInt(-1)
 
-    /**
-     * See Wikipedia article: Continued fraction, Some useful theorems
-     * http://en.wikipedia.org/wiki/Continued_fraction#Some_useful_theorems
-     */
     def seq(next: BigInt, next2: BigInt, as: Stream[Int]): Stream[BigInt] = next #:: seq(next2, as.head * next2 + next, as.tail)
 
     def convergentsOfCF(repeatingA: List[Int]) = {
@@ -90,7 +86,6 @@ object NegativePellEquation {
       ps zip qs
     }
 
-    /* drop(1): x=1, y=0 は自明な解 */
     val (x0, y0) = convergentsOfCF(cf.as).collectFirst { case (p, q) if isPellSolution(cf.n, p, q) => (p.toInt, q.toInt) }.get
 
     def next(s: PellSolution) = PellSolution(x0 * s.x + n * y0 * s.y, x0 * s.y + y0 * s.x)
