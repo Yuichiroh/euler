@@ -10,8 +10,7 @@ package yuima.euler
   * Given that 0 ≤ x1, y1, x2, y2 ≤ 50, how many right triangles can be formed?
   */
 object P91 extends App {
-  val max = args(0).toInt
-
+  val max = if(args.length > 0) args(0).toInt else 50
   val rightAngleOnAxis = max * max * 3
 
   /** the cases where P is a right angle but not in the x-axis */

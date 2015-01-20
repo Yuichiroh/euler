@@ -18,7 +18,7 @@ import scala.language.postfixOps
   * How many starting numbers below ten million will arrive at 89?
   */
 object P92 extends App {
-  val numDigits = args(0).toInt
+  val numDigits = if(args.length > 0) args(0).toInt else 7
   val squares = (0 to 9).map(n => n -> n * n).toMap
   val memo = Map[Int, Int]()
 

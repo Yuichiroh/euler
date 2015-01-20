@@ -14,37 +14,21 @@ class Primes(val sieveMax: Int) extends ArrayBuffer[Int] {
   append(2)
   sieve.append(-1, -1, 0)
 
-  override def apply(i: Int) = if (i < length) super.apply(i) else expandPrimes(i)
-
-  def index(n: Int) = if (n < sieve.length) sieve(n) else expandSieve(n)
-
   def isPrime(n: Int) = if (n < sieveMax) isPrimeWithSieve(n) else isPrimeWithMillerRabin(n)
 
   def isPrime(n: Long) = if (n < sieveMax) isPrimeWithSieve(n.toInt) else isPrimeWithMillerRabin(n)
 
   def isPrimeWithSieve(n: Int) = if (index(n) == -1) false else true
 
-  def next = {
-    current += 1
-    apply(current - 1)
-  }
-
-  private[this] def expandPrimes(i: Int) = {
-    for (j <- length to i if sieve.length < sieveMax) append(
-      Iterator.from(this(j - 1) + 1).withFilter(n => {
-        val result = (0 to j - 1).forall(n % this(_) != 0)
-        if (sieve.length <= n) if (result) sieve.append(j) else sieve.append(-1)
-        result
-      }).next
-    )
-    if (i < length) this(i) else -1
-  }
+  def index(n: Int) = if (n < sieve.length) sieve(n) else expandSieve(n)
 
   def expandSieve(n: Int) = {
-//    println("expanding to", n)
+    //    println("expanding to", n)
     for (m <- sieve.length to n if m < sieveMax) sieve.append({
       val result = takeWhile(p => p * p <= m).forall(m % _ != 0)
-      if (result) { append(m); length } else -1
+      if (result) {
+        append(m); length
+      } else -1
     })
     if (n < sieveMax) sieve(n) else -1
   }
@@ -72,5 +56,23 @@ class Primes(val sieveMax: Int) extends ArrayBuffer[Int] {
         y == n - 1 || (t & 1) != 0
       })
     })
+  }
+
+  def next = {
+    current += 1
+    apply(current - 1)
+  }
+
+  override def apply(i: Int) = if (i < length) super.apply(i) else expandPrimes(i)
+
+  private[this] def expandPrimes(i: Int): Int = {
+    for (j <- length to i if sieve.length < sieveMax) append(
+      Iterator.from(this(j - 1) + 1).withFilter(n => {
+        val result = (0 to j - 1).forall(n % this(_) != 0)
+        if (sieve.length <= n) if (result) sieve.append(j) else sieve.append(-1)
+        result
+      }).next()
+    )
+    if (i < length) this(i) else -1
   }
 }

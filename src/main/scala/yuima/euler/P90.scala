@@ -31,7 +31,8 @@ object P90 extends App {
 
   type Dice = IndexedSeq[Int]
 
-  val max = args(0).toInt
+  val max = if(args.length > 0) args(0).toInt else 100
+
 
   val squares = Stream.from(1).map(n => n * n).takeWhile(_ < max)
 

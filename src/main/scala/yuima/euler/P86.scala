@@ -14,7 +14,7 @@ package yuima.euler
   */
 object P86 extends App {
   val sId = if (args.size > 0) args(0).toInt else 1
-  val thres = args(1).toInt
+  val thres = if(args.size > 1) args(1).toInt else 1000000
 
   def solution = sId match {
     case 0 => solution0(thres)
@@ -33,7 +33,6 @@ object P86 extends App {
         b <- 1 to max
         a <- 1 to b
       } yield hasIntegerShortestRoute(a, b, max)).count(identity)
-      println(max, next)
       if (next > thres) max
       else result(max + 1, next)
     }
@@ -89,7 +88,6 @@ object P86 extends App {
       }
 
       val count = counts.sum
-      println(max, count)
       if (count > thres) max
       else search(max + 1)
     }

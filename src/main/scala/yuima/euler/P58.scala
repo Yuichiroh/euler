@@ -34,7 +34,7 @@ object P58 extends App {
   var numCorner = 0
 
   def numDiagonalPrimes(primeTest: Int => Boolean) = corners(2, 3).takeWhile(ns => {
-    val ps = ns.filter(primeTest).size
+    val ps = ns.count(primeTest)
     numPrime += ps
     numCorner += 4
     numPrime.toDouble / numCorner >= 0.1
@@ -69,12 +69,16 @@ object P58 extends App {
   }
   
   def solution0 = numDiagonalPrimes(isPrime)
-  def solution1 = numDiagonalPrimes(isPrimeMillerRabin(20))
+
+  def solution1 = {
+    val primes = new Primes(10e2.toInt)
+    numDiagonalPrimes(primes.isPrime)
+  }
 
   val sId = if (args.size > 0) args(0).toInt else 1
   def solution = sId match {
     case 0 => solution0
-    case 1 => {println("probabilistic solution"); solution1}
+    case 1 => solution1
   }
   println(solution)
 }

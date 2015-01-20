@@ -17,20 +17,16 @@ object P71 extends App {
   /** if a1/b1 < a/b then a1/b1 < (a1 + a)/(b1 + b) < a/b
     * see Wikipedia: http://www.wikiwand.com/ja/%E5%88%86%E6%95%B0
     */
-  def solution0 = {
+  def solution = {
     val nom = target.numerator
     val den = target.denominator
 
     ((limit - den) to limit).map(d => Rational((d * nom) / den, d)).filter(_ < target).max
   }
 
-  val sId = if (args.size > 0) args(0).toInt else 1
-  val limit = args(1).toInt
+  val limit = if (args.size > 0) args(0).toInt else 1000000
   val target = Rational(3, 7)
 
-  def solution = sId match {
-    case 0 => solution0
-  }
   println(solution)
 
 }

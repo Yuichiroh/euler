@@ -28,9 +28,11 @@ import scala.io.Source
  * Note: You can assume that all the Roman numerals in the file contain no more than four consecutive identical units.
  */
 object P89 extends App {
+  val file = getClass.getClassLoader.getResource("p089_roman.txt").getPath
   val r2num = Map('I' -> 1, 'V' -> 5, 'X' -> 10, 'L' -> 50, 'C' -> 100, 'D' -> 500, 'M' -> 1000)
 
-  val solution = Source.fromFile(args(0)).getLines().map { line =>
+
+  val solution = Source.fromFile(file).getLines().map { line =>
     line.size - num2rs(rs2num(line.toList)).size
   }.sum
 

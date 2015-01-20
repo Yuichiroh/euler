@@ -26,7 +26,7 @@ object P69 extends App {
     */
   def solution0 = {
     val factorizer = Factorization(limit)
-    def phi(n: Int) = factorizer.factorize(n).map(f => 1 - 1.0 / f.p).product.toDouble * n
+    def phi(n: Int) = factorizer.factorize(n).map(f => 1 - 1.0 / f.p).product * n
 
     (1 to limit).map(n => (n / phi(n), n)).maxBy(_._1)
   }
@@ -40,7 +40,7 @@ object P69 extends App {
   }
 
   val sId = if (args.size > 0) args(0).toInt else 1
-  val limit = args(1).toInt
+  val limit = if(args.size > 1) args(1).toInt else 1000000
   def solution = sId match {
     case 0 => solution0
     case 1 => solution1

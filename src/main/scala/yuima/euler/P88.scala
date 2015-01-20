@@ -24,7 +24,7 @@ package yuima.euler
  * What is the sum of all the minimal product-sum numbers for 2≤k≤12000?
  */
 object P88 extends App {
-  val max = args(0).toInt
+  val max = if(args.length > 0) args(0).toInt else 12000
   val minimals = Array.fill(max + 1)(0)
 
   /** product-sum ps に e をかける場合、e1 < e2 なら、k1 < k2 */

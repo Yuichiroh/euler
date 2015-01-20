@@ -29,16 +29,16 @@ object P66 extends App {
 
   val max = if (args.size > 0) args(0).toInt else 1000
 
-  def isPellSolution(d: Int, x: BigInt, y: BigInt) = (x * y - d * y * y) == 1
+  def isPellSolution(d: Int, x: BigInt, y: BigInt) = (x * x - d * y * y).toInt == 1
 
   /**
    * Pell's equation:
    * http://en.wikipedia.org/wiki/Pell%27s_equation#Solutions
    */
-  def solution0 = continuedFractionsOfSqrts.map(cf =>
+  def solution0 = continuedFractionsOfSqrts.map { cf =>
     /* drop(1): x=1, y=0 は自明な解 */
     convergentsOfCF(cf.as).drop(1).collectFirst { case (p, q) if isPellSolution(cf.n, p, q) => (cf.n, p) }.get
-  ).maxBy(dx => dx._2)._1
+  }.maxBy(dx => dx._2)._1
 
   println(solution0)
 
@@ -46,7 +46,7 @@ object P66 extends App {
    * see Wikipedia article: Methods of computing square roots
    * http://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Continued_fraction_expansion
    */
-  class ContinuedFraqtionOfSqrt(s: Sqrt) {
+  class ContinuedFractionOfSqrt(s: Sqrt) {
     val n = s.n
     val as = continuedFractionOfSqrt(s.n, s.sqrt.toInt, List(s.sqrt.toInt), 0, 1).reverse
 
@@ -54,7 +54,7 @@ object P66 extends App {
     private def continuedFractionOfSqrt(n: Int, a0: Int, as: List[Int], d: Int, m: Int): List[Int] = {
       val newD = m * as.head - d
       val newM = (n - newD * newD) / m
-      val newA = ((a0 + newD) / newM).toInt
+      val newA = (a0 + newD) / newM
       if (newA == a0 * 2) newA :: as
       else continuedFractionOfSqrt(n, a0, newA :: as, newD, newM)
     }
@@ -63,7 +63,7 @@ object P66 extends App {
   case class Sqrt(n: Int) { val sqrt = Math.sqrt(n) }
 
   def continuedFractionsOfSqrts = (2 to max).map(Sqrt).withFilter(!_.sqrt.isValidInt)
-    .map(new ContinuedFraqtionOfSqrt(_))
+    .map(new ContinuedFractionOfSqrt(_))
 
   /**
    * See Wikipedia article: Continued fraction, Some useful theorems

@@ -1,5 +1,7 @@
 package yuima.euler
 
+import yuima.euler.P69._
+
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.PriorityQueue
 import scala.math.Ordering
@@ -110,7 +112,7 @@ object P70 extends App {
   }
 
   val sId = if (args.size > 0) args(0).toInt else 1
-  val limit = args(1).toInt
+  val limit = if(args.size > 1) args(1).toInt else 1e7.toInt
   def solution = sId match {
     case 0 => solution0
     case 1 => solution1

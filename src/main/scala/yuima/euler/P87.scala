@@ -14,7 +14,7 @@ package yuima.euler
  * How many numbers below fifty million can be expressed as the sum of a prime square, prime cube, and prime fourth power?
  **/
 object P87 extends App {
-  val max = args(0).toInt
+  val max = if (args.length > 0 ) args(0).toInt else 50000000
   val primes = primeNumbers(math.sqrt(max).toInt)
 
   val square = (n: Int) => math.pow(n, 2).toInt

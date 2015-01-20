@@ -1,6 +1,5 @@
 package yuima.euler
 
-import scala.util.Random
 import scala.collection.mutable
 
 object P60 extends App {
@@ -156,6 +155,7 @@ object P60 extends App {
   }
 
   val sId = if (args.size > 0) args(0).toInt else 1
+
   def solution = sId match {
     case 0 => solution0
     case 1 => solution1
