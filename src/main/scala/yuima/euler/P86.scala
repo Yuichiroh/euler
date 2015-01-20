@@ -14,7 +14,7 @@ package yuima.euler
   */
 object P86 extends App {
   val sId = if (args.size > 0) args(0).toInt else 1
-  val thres = if(args.size > 1) args(1).toInt else 1000000
+  val thres = if (args.size > 1) args(1).toInt else 1000000
 
   def solution = sId match {
     case 0 => solution0(thres)
@@ -50,9 +50,8 @@ object P86 extends App {
     * because 2ab <= 2ac <= 2bc.
     * */
   def hasIntegerShortestRoute(a: Int, b: Int, c: Int) = {
-    require(a <= b && b <= c)
-    val shortest = math.pow(a + b, 2) + math.pow(c, 2)
-    math.sqrt(shortest).isValidInt
+    //    require(a <= b && b <= c)
+    math.sqrt(math.pow(a + b, 2) + math.pow(c, 2)).isValidInt
   }
 
   /** generates Pythagorean triples first, then divides one of the sides as the resulting sides composes a cube satisfying the condition.
@@ -87,10 +86,10 @@ object P86 extends App {
         }.sum
       }
 
-      val count = counts.sum
-      if (count > thres) max
+      if (counts.sum > thres) max
       else search(max + 1)
     }
-    search(1)
+
+    search(100)
   }
 }

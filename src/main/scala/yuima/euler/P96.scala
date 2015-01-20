@@ -30,13 +30,11 @@ object P96 extends App {
   val file = getClass.getClassLoader.getResource("p096_sudoku.txt").getPath
   val data = Source.fromFile(file).getLines()
 
-  val boards = Iterator.continually(data.take(10).drop(1)).takeWhile(ls => data.hasNext).map(_.map(_.toList).toList)
+  val boards = Iterator.continually(data.drop(1).take(9)).takeWhile(ls => data.hasNext).map(_.map(_.toList).toList)
 
   val solver = new SudokuSolver(9, 3, blank = (_: Char) == '0')
 
-  def solution = boards.map { board =>
-    solver.solutions(board)(0)(0).take(3).map(_.toString).mkString.toInt
-  }.sum
+  def solution = boards.map { board => solver.solution(board).head.take(3).mkString.toInt }.sum
 
   println(solution)
 }

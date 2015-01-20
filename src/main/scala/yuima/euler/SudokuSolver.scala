@@ -22,6 +22,9 @@ class SudokuSolver(val boardSize: Int = 9,
   /** returns a list of solutions computed from a board with some empty cells */
   def solutions(b: Board) = search(prune(choices(b))).map(_.map(_.map(_.head)))
 
+  def solution(b: Board) = search(prune(choices(b))).head.map(_.map(_.head))
+
+
   def isCorrect(b: Board) =
     (rows(b) forall noDuplication) && (cols(b) forall noDuplication) && (boxes(b) forall noDuplication)
 

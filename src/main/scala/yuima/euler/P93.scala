@@ -27,15 +27,15 @@ object P93 extends App {
 
   println(solution)
 
-  def solution =
-    (1 to 9).combinations(4).maxBy { nums =>
-      val results = nums.permutations.foldLeft(Seq[Int]()) { (seq, ns) =>
-        val fractions = ns.map(n => Seq(Fraction(n)))
-        val result = (1 until ns.size).flatMap { i => operation(fractions.take(i), fractions.drop(i)) }
-        seq ++ result.filter(_.denominator == 1).map(_.numerator.toInt).filter(_ > 0)
-      }.distinct.sorted
-      consecutiveMax(results)
-    }.mkString
+  def solution = (1 to 9).combinations(4).maxBy { digits =>
+    val positiveIntegerTargets = digits.permutations.foldLeft(Seq[Int]()) { (seq, ds) =>
+      val fractions = ds.map(digit => Seq(Fraction(digit)))
+      val results = (1 until ds.size).flatMap { i => operation(fractions.take(i), fractions.drop(i)) }
+      seq ++ results.filter(_.denominator == 1).map(_.numerator.toInt).filter(_ > 0)
+    }.distinct.sorted
+
+    consecutiveMax(positiveIntegerTargets)
+  }.mkString
 
   def operation(lefts: Seq[Seq[Fraction]], rights: Seq[Seq[Fraction]]): Seq[Fraction] = {
     val ls = if (lefts.size == 1) lefts(0) else (1 until lefts.size).flatMap(i => operation(lefts.take(i), lefts.drop(i))).distinct
@@ -43,7 +43,7 @@ object P93 extends App {
     for {
       l <- ls
       r <- rs
-      op <- ops if r.numerator != 0 || op != Fraction./
+      op <- ops if r.numerator.toInt != 0 || op != Fraction./
     } yield op(l)(r)
   }
 
