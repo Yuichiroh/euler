@@ -84,17 +84,17 @@ class SudokuSolver(val boardSize: Int = 9,
   /** generate a list of matrices where the first cell having the smallest number of choices is expanded. */
   def expand[T](m: Matrix[Choices[T]]): Choices[Matrix[Choices[T]]] = {
     val minChoice = m.flatMap(_.map(_.size).filter(_ > 1)).min
-    lazy val (rows1, row :: rows2) = m.splitAt(m.indexWhere(_.exists(best)))
-    lazy val (row1, cs :: row2) = row.splitAt(row.indexWhere(best))
 
     def best(choices: Choices[T]) = choices.size == minChoice
+
+    lazy val (rows1, row :: rows2) = m.splitAt(m.indexWhere(_.exists(best)))
+    lazy val (row1, cs :: row2) = row.splitAt(row.indexWhere(best))
 
     cs.map(c => rows1 ++ List(row1 ++ (Choices(c) :: row2)) ++ rows2)
   }
 
   /** removes already fixed entries from the unfixed choices of each row, column or box. */
-  def prune[T](m: Matrix[Choices[T]]) =
-    (pruneBy[T](boxes) andThen pruneBy(rows) andThen pruneBy(cols))(m)
+  def prune[T](m: Matrix[Choices[T]]) = (pruneBy[T](boxes) andThen pruneBy(rows) andThen pruneBy(cols))(m)
 
   /** removes already fixed entries from the unfixed choices of each row, column or box. */
   def pruneBy[T](f: Matrix[Choices[T]] => Matrix[Choices[T]]) = (f andThen (_ map reduce)) andThen f
@@ -125,5 +125,4 @@ class SudokuSolver(val boardSize: Int = 9,
   object Choices {
     def apply[T](elms: T*): Choices[T] = elms.toList
   }
-
 }
